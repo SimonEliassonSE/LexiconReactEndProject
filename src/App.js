@@ -13,7 +13,7 @@ function App() {
    <img src={require('./Image/Logo.PNG')} alt="logo" width="60" height="50" />
 <ul className="navbar-nav">
   <li className="nav-item- m-1">
-    <Link className="btn btn-light btn_outline-primary" to = "/Homepage">
+    <Link className="btn btn-light btn_outline-primary" to = "/">
       <i className="fa fa-home"></i> Home
     </Link>
     <Link className="btn btn-light btn_outline-primary" to = "/Products">
@@ -30,7 +30,7 @@ function App() {
 
       </nav>
       <Routes>
-        <Route index path='/Homepage'  element={ <Homepage/> } />
+        <Route index path='/'  element={ <Homepage/> } />
         <Route path='/Products' element={ <Products/> }/>
         <Route path='/Cart'  element={ <Cart/> } />
       
