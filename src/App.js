@@ -29,7 +29,7 @@ function App() {
 
       </nav>
       <Routes>
-        <Route index path='/Homepage'  element={ <Homepage/> } />
+        <Route index path='/'  element={ <Homepage/> } />
         <Route path='/Products' element={ <Products/> }/>
         <Route path='/Cart'  element={ <Cart/> } />
       
