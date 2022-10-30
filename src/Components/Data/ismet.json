@@ -1,0 +1,56 @@
+[
+    {
+        "categoryId":1,
+        "name":"Computers and office",
+        "description":"Wearable headphones",
+        "products":null
+    },
+
+    {
+        "categoryId":7,
+        "name":"Gaming",
+        "description":"Jag heter si",
+        "products":null
+    },
+    {
+        "categoryId":1,
+        "name":"Appliances",
+        "description":"Wearable headphones",
+        "products":null
+    },
+
+    {
+        "categoryId":7,
+        "name":"TV",
+        "description":"Jag heter si",
+        "products":null
+    },
+    {
+        "categoryId":1,
+        "name":"Mobile phones",
+        "description":"Wearable headphones",
+        "products":null
+    },
+
+    {
+        "categoryId":7,
+        "name":"Home",
+        "description":"Jag heter si",
+        "products":null
+    },
+    {
+        "categoryId":1,
+        "name":"Drogerie",
+        "description":"Wearable headphones",
+        "products":null
+    },
+
+  
+
+    {
+        "categoryId":7,
+        "name":"Cosmetics",
+        "description":"Jag heter si",
+        "products":null
+    }
+]
