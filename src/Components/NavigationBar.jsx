@@ -1,5 +1,8 @@
 import '../App.css';
 import { Link } from 'react-router-dom';
+
+
+
 export const NavigationBar = () => {
 
 
@@ -19,6 +22,12 @@ return(
           </Link>
           <Link className="btn btn-light btn_outline-primary" to = "/Cart">
             <i class="fa fa-shopping-cart"></i> Cart
+          </Link>
+          <Link className="btn btn-light btn_outline-primary" to = "/Login">
+            <i class="fa fa-user"></i> Login
+          </Link>
+          <Link className="btn btn-light btn_outline-primary" to = "/Signup">
+            <i class="fa fa-user-plus"></i> Signup
           </Link>
           </li>
 
