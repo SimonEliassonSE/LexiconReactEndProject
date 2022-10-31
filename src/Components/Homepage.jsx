@@ -1,6 +1,6 @@
 import React from "react";
 import myData from "./Data/ismet.json";
-import joj from "../Image/Logo1.PNG";
+import joj from "../Image/Logo.PNG";
 
 
 export class Homepage extends React.Component {
