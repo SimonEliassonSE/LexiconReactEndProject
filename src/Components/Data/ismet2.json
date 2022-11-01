@@ -31,5 +31,38 @@
         "brand":"Steel Series",
         "categoryID":1,
         "category":null
+    },
+    { 
+        "productId":4,
+        "name":"Samsung 2001",
+        "price":1000,
+        "description": "A pair of Steelseries headset",
+        "productSaldo":100,
+        "img":"...",
+        "brand":"Steel Series",
+        "categoryID":1,
+        "category":null
+    },
+    { 
+        "productId":5,
+        "name":"Jaybird 3x",
+        "price":1000,
+        "description": "A pair of Steelseries headset",
+        "productSaldo":100,
+        "img":"...",
+        "brand":"Steel Series",
+        "categoryID":1,
+        "category":null
+    },
+    { 
+        "productId":6,
+        "name":"AKG In-Ear",
+        "price":1000,
+        "description": "A pair of Steelseries headset",
+        "productSaldo":100,
+        "img":"...",
+        "brand":"Steel Series",
+        "categoryID":1,
+        "category":null
     }
 ]
