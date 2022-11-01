@@ -18,6 +18,7 @@ function App() {
         <Route index path='/'  element={ <Homepage/> } />
         <Route path='/Products' element={ <Products/> }/>
         <Route path='/Cart'  element={ <Cart/> } />
+        
       
       </Routes>
       <div className='footer'>Ismet Catovic</div>
