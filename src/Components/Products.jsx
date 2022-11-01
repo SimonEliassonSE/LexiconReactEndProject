@@ -23,46 +23,32 @@ export class Products extends React.Component {
     brand:""
         };
 
-        
-
     }
 
 
 
-    DetailsList(productId) {
-      fetch(products + productId, {
-        hedar: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-        .then((respons) => respons.json())
-        .then((data) => {
-          this.setState({
-            productId : data.productId,
-            name: data.name,
-            price: data.price,
-            description: data.description,
-            productSaldo: data.productSaldo,
-            img: data.img,
-            brand:data.brand
-       
-          
-          });
-          console.log("===========details============");
-          console.log(data);
-        });
-    }
-   
        
 componentDidMount(){
-  this.DetailsList();
+
    
 }
 
 
 detailsClick(product) {
-  this.DetailsList(product.productId);
+
+  if (product.productId != null){
+  
+   this.setState({
+    productId : product.productId,
+    name: product.name,
+    price: product.price,
+    description: product.description,
+    productSaldo: product.productSaldo,
+    img: product.img,
+    brand:product.brand
+
+  });
+  } 
 }
 
 render(){
@@ -130,9 +116,6 @@ render(){
                                                    <span className="fs-4">{product.name}</span>
                                                    <span className="ms-1 text-muted">{product.price}:-</span>
                                                </Card.Title>
-                                               <Card.Text className="d-flex justify-content-start">
-                                                   {product.description}
-                                               </Card.Text>
                                                <Card.Link  className="btn btn-primary"
                                                  data-bs-toggle="modal"
                                                  data-bs-target="#exampleModel"
