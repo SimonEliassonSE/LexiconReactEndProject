@@ -21,6 +21,8 @@ function App() {
         <Route path='/Cart'  element={ <Cart/> } />
         <Route path='/Login'  element={ <Login/> } />
         <Route path='/Signup'  element={ <Signup/> } />
+        
+      
       </Routes>
       <div className='footer'>Ismet Catovic</div>
     </div>

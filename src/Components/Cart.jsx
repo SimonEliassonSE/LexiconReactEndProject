@@ -1,4 +1,5 @@
 import React from "react";
+import {Card, Col, Container, Row} from "react-bootstrap"
 
 
 export class Cart extends React.Component {
@@ -9,7 +10,7 @@ export class Cart extends React.Component {
     constructor(props) {
         super(props)
         
-  this.state = {
+            this.state = {
     
         };
 
@@ -27,8 +28,20 @@ render(){
        
     
         return (
-            <div>
-                <h1>Cart</h1>
+            <div className="container container-md">
+                <div className="p-4">
+                    <h1 className="display-6">Shopping cart</h1>
+                </div>
+
+                <div className="d-flex justify-content-center">
+                    <Container>
+                        
+                    </Container>
+                </div>
+
+
+
+
             </div>
         );
             
