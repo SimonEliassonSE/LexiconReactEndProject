@@ -36,26 +36,17 @@ render(){
    <div id="Login">  
    <form >
    
-       <h3 >Sign In</h3>
-       
-       <div>
-         <label>Email address</label>
-         <input
-           type="email"
-           className="form-control mt-1"
-           placeholder="Enter email"
-         />
-         </div>
+<h3 >Sign In</h3>
+  
+<div class="form-outline mb-4">
+<input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+<label class="form-label" for="form3Example3cg">Your Email</label>
+</div>
 
-       <div >
-         <label>Password</label>
-         <input
-           type="password"
-           className="form-control mt-1"
-           placeholder="Enter password"
-         />
-
-       </div>
+<div class="form-outline mb-4">
+<input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+<label class="form-label" for="form3Example4cg">Password</label>
+</div>
           
        
        <div >

@@ -18,80 +18,66 @@ export class Signup extends React.Component {
         };
 
     }
-   
-       
+  
+  
 componentDidMount(){
-   
+
 }
 
 render(){
     const{
         
     } =this.state;
-       
-    
-        return (
-               
-    <div id="signup">
 
-  
-    <h3>Sign Up</h3>
+    return (
 
 
-    <form >
-  
-        
-        <div>
-          <label>Full Name</label>
-          <input
-            type="Name"
-            className="form-control mt-1"
-            placeholder="Enter FullName"
-          />
-        </div>
+  <div id="signup"> 
+<h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-        <div >
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control mt-1"
-            placeholder="Enter email"
-          />
-          </div>
+<form>
+
+<div class="form-outline mb-4">
+<input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+<label class="form-label" for="form3Example1cg">Your Name</label>
+</div>
+
+<div class="form-outline mb-4">
+<input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+<label class="form-label" for="form3Example3cg">Your Email</label>
+</div>
+
+<div class="form-outline mb-4">
+<input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+<label class="form-label" for="form3Example4cg">Password</label>
+</div>
+<div class="form-outline mb-4">
+<input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
+<label class="form-label" for="form3Example4cdg">Repeat your password</label>
+</div>
+
+<div class="form-check d-flex justify-content-center mb-5">
+<input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+<label class="form-check-label" for="form2Example3g">
+I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+</label>
+</div>
+
+<div class="d-flex justify-content-center">
+<button type="button"
+class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+</div>
+
+<p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="http://localhost:3000/Login"
+class="fw-bold text-body"><u>Login here</u></a></p>
+
+</form>
+</div>
 
 
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control mt-1"
-            placeholder="Enter password"
-          />
-        </div>
+);
 
-        <div>
-          <label>Confirm Password</label>
-          <input
-            type="confirm password"
-            className="form-control mt-1"
-            placeholder="Enter password"
-          />
-        </div>
-        
-        <div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
-
-      
-
-    </form>
-    
-  </div>
-        );
-            
-    }
+  }
 }
 
 
