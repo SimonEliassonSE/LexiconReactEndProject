@@ -2,7 +2,7 @@ import React from "react";
 import myData from "./Data/ismet.json";
 import products from "./Data/ismet2.json";
 import joj from "../Image/Logo.PNG";
-import {Card, Col, Row, Container} from "react-bootstrap";
+import {Card, Col, Row, Container, Badge} from "react-bootstrap";
 
 export class Homepage extends React.Component {
 
@@ -64,7 +64,7 @@ render(){
                                             <Card.Img variant="top" src={joj} style={{ width: 200, height: 150 }}></Card.Img>
                                             <Card.Body>
                                                 <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
-                                                    <span className="fs-4">{product.name}</span>
+                                                    <span className="fs-4">{product.name} </span>
                                                     <span className="ms-1 text-muted">{product.price}:-</span>
                                                 </Card.Title>
                                                 <Card.Text className="d-flex justify-content-start">
