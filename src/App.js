@@ -21,7 +21,6 @@ function App() {
         
       
       </Routes>
-      <div className='footer'>Ismet Catovic</div>
     </div>
   );
 }
