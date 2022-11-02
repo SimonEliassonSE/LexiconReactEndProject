@@ -1,77 +1,88 @@
-
-import "bootstrap/dist/css/bootstrap.min.css"
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import React from "react";
+import { useEffect, useState, useContext } from "react";
+import Auth from "../Context/Auth";
+import { login } from "../services/AuthApi";
 
 
-export class Login extends React.Component {
+const Login = ({history}) => {
+  const {isAuthenticated, setIsAuthenticated} = useContext(Auth);
 
-    
-  
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  })
 
-    constructor(props) {
-        super(props)
-        
-  this.state = {
-    
-        };
+  const handleChange = ({currenTarget}) => {
+    const { name, value } = currenTarget;
 
+    setUser({ ...user, [name]: value });
+  }
+
+  const handleSubmit =async event => {
+    event.preventDefault();
+
+    try{
+      const response = await login(user);
+      setIsAuthenticated(response);
+      history.replace('./Homepage')
+      console.log(response);
+    }catch ({response}){
+      console.log(response);
     }
-   
-       
-componentDidMount(){
-   
-}
+ 
+  }
 
-render(){
-    const{
-        
-    } =this.state;
-       
-    
-        return (
+useEffect(()=>{
+  if(isAuthenticated){
+    history.replace('./Homepage');
+  }
+ 
+}, [history, isAuthenticated]);
+
+
+  return (
+    <div id="Login">
+      <form onSubmit={handleSubmit}>
+        <h3>Sign In</h3>
+
+        <div className="form-outline mb-4">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            className="form-control form-control-lg"
+            onChange={handleChange}
+          />
+          <label className="form-label" htmlFor="email">Your Email</label>
+        </div>
+
+        <div className="form-outline mb-4">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className="form-control form-control-lg"
+            onChange={handleChange}
+          />
+          <label className="form-label" htmlFor="password">Password</label>
+        </div>
+
+        <div>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </div>
       
-       
-   <div id="Login">  
-   <form >
-   
-<h3 >Sign In</h3>
-  
-<div class="form-outline mb-4">
-<input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-<label class="form-label" for="form3Example3cg">Your Email</label>
-</div>
+      </form>
+      <div className="text-center">
+          <p>
+            Not a member? <a href="http://localhost:3000/Signup">Register</a>
+          </p>
+          </div>
+    </div>
+  );
+};
 
-<div class="form-outline mb-4">
-<input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-<label class="form-label" for="form3Example4cg">Password</label>
-</div>
-          
-       
-       <div >
-         <button type="submit" className="btn btn-primary">
-           Submit
-         </button>
-       </div>
-
-    
-
-    
-     <div class="text-center">
-  <p>Not a member? <a href="http://localhost:3000/Signup">Register</a></p>
-  </div>
-
-  
-
-</form>
-   
- </div>
-        );
-            
-    }
-}
-
-
-
-
+export default Login;
