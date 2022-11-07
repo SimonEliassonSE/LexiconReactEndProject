@@ -2,6 +2,8 @@
 import './App.css';
 import {Homepage} from './Components/Homepage';
 import {Products} from './Components/Products';
+import {MyAccount} from './Components/MyAccount';
+import {AddShippingAddress} from './Components/AddShippingAddress';
 import {NavigationBar} from './Components/NavigationBar';
 import {Cart} from './Components/Cart';
 import { Route, Routes } from 'react-router-dom';
@@ -20,13 +22,15 @@ function App() {
   return (
     <Auth.Provider value={{isAuthenticated, setIsAuthenticated}} >
     <div className="App">
-     <NavigationBar></NavigationBar>
+     <NavigationBar />
       <Routes>
 
         <Route index path='/'  element={ <Homepage/> } />
         <Route path='/Products' element={ <Products/> }/>
         <Route path='/Cart'  element={ <Cart/> } />
         <Route path='/Login'  element={ <Login/> } />
+        <Route path='/MyAccount'  element={ <MyAccount/> } />
+        <Route path='/AddShippingAddress'  element={ <AddShippingAddress/> } />
         <Route path='/Signup'  element={ <Signup/> } />
       
       
