@@ -40,6 +40,9 @@ return(
           <Link className="btn btn-light btn_outline-primary" to = "/Login">
             <i class="fa fa-user"></i> Login
           </Link>
+          <Link className="btn btn-light btn_outline-primary" to = "/MyAccount">
+            <i class="fa fa-user"></i> My account
+          </Link>
           <Link className="btn btn-light btn_outline-primary" to = "/Signup">
             <i class="fa fa-user-plus"></i> Signup
           </Link>
