@@ -1,6 +1,6 @@
 import React from "react";
 import {Card, Col, Container, Image, ListGroup, Row, Title} from "react-bootstrap"
-import joj from "../Image/Logo.PNG";
+import imageExample from "../Image/Logo.PNG";
 import cartItems from "./Data/ismet3.json"
 
 export class Cart extends React.Component {
@@ -45,7 +45,7 @@ render(){
                         <tbody>
                         <tr> 
         
-                            <td width={120} height={120}><img className="d-flex justify-content-start" src={joj} width={120} height={120}/></td>
+                            <td width={120} height={120}><img className="d-flex justify-content-start" src={imageExample} width={120} height={120}/></td>
 
                             <td width={200} className="col-md-5">
                                 <h4 className="text-start">{item.name}</h4>
@@ -90,29 +90,30 @@ render(){
               
             
 
-                <div className="d-flex mx-auto my-auto w-25 border border-dark rounded">
+                <div className="mx-auto my-auto">
                     
                     {/*<div className="d-flex flex-column my-auto mx-auto py-2">*/}
 
-                    <div className="d-flex flex-column px-2 py-2">
-                        <h4 className="d-flex justify-content-start pb-2">
-                            Varukörg
+                    <div style={{width: "350px", padding: "15px", backgroundColor: "black"}} className="rounded">
+                        <div className="p-1 rounded" style={{backgroundColor: "white"}}>
+                        <h4 className="p-3 text-left">
+                            Varukorg
                         </h4>
                     
                         <div>
-                            <h5 className="d-flex justify-content-between">
+                            <h5 className="d-flex justify-content-between px-3">
                                 <span className="justify-content-start">Cost</span>
                                 <span className="justify-content-end">300:- </span>
                             </h5>
                         </div>
                         <div>
-                            <h5 className="d-flex justify-content-between">
+                            <h5 className="d-flex justify-content-between px-3 pb-1">
                                 <span className="justify-content-start">Delivery</span>
                                 <span className="justify-content-end">35:- </span>
                             </h5>
                         </div>
                         <div>
-                            <h5 className="d-flex justify-content-between border-top">
+                            <h5 className="d-flex justify-content-between border-top px-3 pb-4 pt-2">
                                 <span className="justify-content-start">Total</span>
                                 <span className="justify-content-end">325:- </span>
                             </h5>
@@ -132,7 +133,7 @@ render(){
                             
                           
 
-                       
+                       </div>
                            
                     </div>
 
