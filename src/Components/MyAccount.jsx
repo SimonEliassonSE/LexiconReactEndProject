@@ -56,8 +56,8 @@ render(){
 
                 <div className="px-1 d-flex justify-content-between">
                     <div className="d-flex flex-column" style={{marginLeft: "12px"}}>
-                        <Link className="btn btn-primary my-1" to={`/AddShippingAddress/`}>Add shipping address</Link>
-                        <Link className="btn btn-primary my-1">Add billing details</Link>
+                        <Link className="btn btn-primary my-1" to={`/AddDetails/`}>Add personal details</Link>
+                        <Link className="btn btn-primary my-1" to={`/AddBilling/`}>Add billing details</Link>
 
 
                     

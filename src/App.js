@@ -3,7 +3,8 @@ import './App.css';
 import {Homepage} from './Components/Homepage';
 import {Products} from './Components/Products';
 import {MyAccount} from './Components/MyAccount';
-import {AddShippingAddress} from './Components/AddShippingAddress';
+import {AddDetails} from './Components/AddDetails';
+import {AddBilling} from './Components/AddBilling';
 import {NavigationBar} from './Components/NavigationBar';
 import {Cart} from './Components/Cart';
 import { Route, Routes } from 'react-router-dom';
@@ -30,7 +31,8 @@ function App() {
         <Route path='/Cart'  element={ <Cart/> } />
         <Route path='/Login'  element={ <Login/> } />
         <Route path='/MyAccount'  element={ <MyAccount/> } />
-        <Route path='/AddShippingAddress'  element={ <AddShippingAddress/> } />
+        <Route path='/AddDetails'  element={ <AddDetails/> } />
+        <Route path='/AddBilling'  element={ <AddBilling/> } />
         <Route path='/Signup'  element={ <Signup/> } />
       
       
