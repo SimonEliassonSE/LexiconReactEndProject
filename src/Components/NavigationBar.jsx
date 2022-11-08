@@ -30,36 +30,33 @@ return(
             <i className="fa fa-home"></i> Home
           </Link>
           <Link className="btn btn-light btn_outline-primary" to = "/Products">
-            <i class="fa fa-shopping-bag"></i> Products 
+            <i className="fa fa-shopping-bag"></i> Products 
           </Link>
           <Link className="btn btn-light btn_outline-primary" to = "/Cart">
-            <i class="fa fa-shopping-cart"></i> Cart
+            <i className="fa fa-shopping-cart"></i> Cart
           </Link>
           {(!isAuthenticated && (
             <>
           <Link className="btn btn-light btn_outline-primary" to = "/Login">
-            <i class="fa fa-user"></i> Login
+            <i className="fa fa-user"></i> Login
           </Link>
+          {/* If User exist we should show only My Account & log out (Not Login & Signup) */}
           <Link className="btn btn-light btn_outline-primary" to = "/MyAccount">
-            <i class="fa fa-user"></i> My account
+            <i className="fa fa-user"></i> My account
           </Link>
           <Link className="btn btn-light btn_outline-primary" to = "/Signup">
-            <i class="fa fa-user-plus"></i> Signup
+            <i className="fa fa-user-plus"></i> Signup
           </Link>
           </>
           )) || (
             <>
           <button className="btn btn-light btn_outline-primary" onClick={handleLogout}>
-          <i class="fa fa-"></i> Logout
+          <i className="fa fa-"></i> Logout
         </button>
-
         </>
           )}
           </li>
-
-         </ul>
-
-     
+         </ul>     
       </nav>
     )
         }

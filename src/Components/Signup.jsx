@@ -67,56 +67,66 @@ render(){
 
 
   <div id="signup"> 
-<h2 class="text-uppercase text-center mb-5">Create an account</h2>
+<h2 className="text-uppercase text-center mb-5">Create an account</h2>
 
 <form>
 
-<div class="form-outline mb-4">
-<input class="form-control form-control-lg"
+
+{/* 
+---> we dont need Name to create a User, we only need Email (UserName) & Password!
+<div className="form-outline mb-4">
+<input className="form-control form-control-lg"
    type="text"
                   name="name"
                   id="name"
                   onChange={this.onNameChange}  />
-<label class="form-label" for="form3Example1cg">Your Name</label>
-</div>
+<label className="form-label" >Your Name</label>
+</div> */}
 
-<div class="form-outline mb-4">
-<input  class="form-control form-control-lg"
+<div className="form-outline mb-4">
+<input  className="form-control form-control-lg"
   type="email"
                   name="email-address"
                   id="email-address"
                   onChange={this.onEmailChange} />
-<label class="form-label" for="form3Example3cg">Your Email</label>
+<label className="form-label" >Your Email</label>
 </div>
 
-<div class="form-outline mb-4">
-<input  class="form-control form-control-lg"
+<div className="form-outline mb-4">
+<input  className="form-control form-control-lg"
  type="password"
                   name="password"
                   id="password"
                   onChange={this.onPasswordChange}  />
-<label class="form-label" for="form3Example4cg">Password</label>
+<label className="form-label" >Password</label>
 </div>
-<div class="form-outline mb-4">
-<input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-<label class="form-label" for="form3Example4cdg">Repeat your password</label>
+{/* 
+for="form3Example1cg"
+for="form3Example3cg"
+for="form3Example4cg" 
+for="form3Example4cdg"
+for="form2Example3g"*/}
+<div className="form-outline mb-4">
+<input type="password" id="form3Example4cdg" className="form-control form-control-lg" />
+<label className="form-label" >Repeat your password</label>
 </div>
 
-<div class="form-check d-flex justify-content-center mb-5">
-<input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-<label class="form-check-label" for="form2Example3g">
-I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+
+<div className="form-check d-flex justify-content-center mb-5">
+<input className="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+<label className="form-check-label" >
+I agree all statements in <a href="#!" className="text-body"><u>Terms of service</u></a>
 </label>
 </div>
 
-<div class="d-flex justify-content-center">
+<div className="d-flex justify-content-center">
 <button type="button"
-class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
 onClick={this.onSubmitSignIn}>Register</button>
 </div>
 
-<p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="http://localhost:3000/Login"
-class="fw-bold text-body"><u>Login here</u></a></p>
+<p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="http://localhost:3000/Login"
+className="fw-bold text-body"><u>Login here</u></a></p>
 
 </form>
 </div>
