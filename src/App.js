@@ -3,6 +3,7 @@ import { Homepage } from "./Components/Homepage";
 import { Products } from "./Components/Products";
 import { MyAccount } from "./Components/MyAccount";
 import { AddShippingAddress } from "./Components/AddShippingAddress";
+import { AddPersonalDetails } from "./Components/AddPersonalDetails";
 import { NavigationBar } from "./Components/NavigationBar";
 import { Cart } from "./Components/Cart";
 import { Route, Routes } from "react-router-dom";
@@ -23,6 +24,7 @@ import {
   UserAuthenticator,
   CurrentlyLoggedin,
 } from "./index";
+import { AddPaymentMethod } from "./Components/AddPaymentMethod";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -165,7 +167,9 @@ function App() {
           }
         />
         <Route path="/MyAccount" element={<MyAccount />} />
+        <Route path="/AddPaymentMethod" element={<AddPaymentMethod />} />
         <Route path="/AddShippingAddress" element={<AddShippingAddress />} />
+        <Route path="/AddPersonalDetails" element={<AddPersonalDetails />} />
         <Route path="/Signup" element={<Signup />} />
       </Routes>
     </div>
