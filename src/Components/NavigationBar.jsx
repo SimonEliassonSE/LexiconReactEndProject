@@ -40,16 +40,17 @@ return(
           <Link className="btn btn-light btn_outline-primary" to = "/Login">
             <i className="fa fa-user"></i> Login
           </Link>
-          {/* If User exist we should show only My Account & log out (Not Login & Signup) */}
-          <Link className="btn btn-light btn_outline-primary" to = "/MyAccount">
-            <i className="fa fa-user"></i> My account
-          </Link>
+       
           <Link className="btn btn-light btn_outline-primary" to = "/Signup">
             <i className="fa fa-user-plus"></i> Signup
           </Link>
           </>
           )) || (
             <>
+               
+          <Link className="btn btn-light btn_outline-primary" to = "/MyAccount">
+            <i className="fa fa-user"></i> My account
+          </Link>
           <button className="btn btn-light btn_outline-primary" onClick={handleLogout}>
           <i className="fa fa-"></i> Logout
         </button>
