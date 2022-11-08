@@ -1,16 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import React from "react";
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { UserAuthenticator, CurrentlyLoggedin, UserArray } from "../index";
-import Auth from "../Context/Auth";
-import { login } from "../services/AuthApi";
 import Axios from "axios";
-
+import { Navigate } from "react-router-dom";
 
 function Login() 
 {
-  const {userList, setUserList} = useContext(UserArray)
+  const {userList } = useContext(UserArray)
   const {isAuthenticated, setIsAuthenticated} = useContext(UserAuthenticator);
   const {currentlyLoggedIn, setcurrentlyLoggedIn} = useContext(CurrentlyLoggedin);
 
@@ -28,122 +26,57 @@ function Login()
   };
   console.log(enteredPassword);
 
-  // const handleSubmit =async event => {
-  //   event.preventDefault();    
+  function validateUserInput (){
+    Axios.post(`https://localhost:7117/api/PasswordHandlerAPI`, {
+        userName: enteredUserName,
+        password: enteredPassword,
+      })
+      .then(function (response) {
+        console.log(response);
+        if(response.data == "Failed")
+        {
+          console.log("Wrong password!")
+        }
 
-  //   useEffect(() => {
-  //     const getCategorys = async () => {
-  //       await Axios.post("https://localhost:7117/api/CategoryAPI/categories")
-  //         .then((res) => {
-  //           setCategoryList(res.data);
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     };
-  //     getCategorys();
-  //   }, []);
-  //   console.log(CategoryList);
- 
-  // }
+        else if(response.data == "Success")
+        {
+          setIsAuthenticated(true);      
+          setcurrentlyLoggedIn([enteredUserName, enteredPassword])    
+        }
 
-  const submitHandler = async (event) => {
-    event.preventDefault();
-// Check if the entered username exist in users array 
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
+
+  const submitHandler = (event) => {
+    event.preventDefault()
     userList.forEach((el) => {
       console.log(el) 
       if(el.email == enteredUserName)
       {
-         Axios.post(`https://localhost:7117/api/PasswordHandlerAPI`, {
-          userName: enteredUserName,
-          password: enteredPassword,
-        },
-        console.log(enteredUserName, enteredPassword))
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        console.log("Match found, validating input!")
+        validateUserInput();
+        // const activeUser = {
+        //   LoggedinUsername: enteredUserName,
+        //   LoggedinPassword: enteredPassword
+        // }
+        // setcurrentlyLoggedIn([enteredUserName, enteredPassword])
+        // console.log(currentlyLoggedIn)
       }     
+      else {
+        console.log("No match found!")
+      }
     });
-
-
-      // await Axios
-      // .post(`https://localhost:7117/api/PasswordHandlerAPI`, {
-      //   // UserName: enteredUserName,
-      //   Password: enteredPassword      
-      // })
-      // .then(function (response) {
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
-      // console.log(enteredPassword)
-      // if(userStatus === null){
-      //   setUserStatus(1)
-      // }
-
-      // else {
-      //   let counter = userStatus;
-      //   ++counter;
-      //   setUserStatus(counter);
-      //   // console.log(userStatus);
-      // }
-
-
-    // else 
-    // {
-    //   console.log("Wrong Username")
-    // }
-
-  // const nameChangeHandler = (event) => {
-  //   setEnteredName(event.target.value);
-  // };
-
-  // const [user, setUser] = useState({
-  //   email: "",
-  //   password: ""
-  // })
-
-  // const loginVerification = {}
-
-  // We need to post the password to MVC and encrypt it ande check if it exists, if it dose the backend should return true, here we can use are UserAuthenticator to set true or false. 
-
-  // const handleChange = ({currenTarget}) => {
-  //   const { name, value } = currenTarget;
-
-  //   setUser({ ...user, [name]: value });
-  // }
-
-  // const handleSubmit =async event => {
-  //   event.preventDefault();
-
-  //   try{
-  //     const response = await login(user);
-  //     setIsAuthenticated(response);
-  //     history.replace('./Homepage')
-  //     console.log(response);
-  //   }catch ({response}){
-  //     console.log(response);
-  //   }
- 
-  // }
-
-// useEffect(()=>{
-//   if(isAuthenticated){
-//     history.replace('./Homepage');
-//   }
- 
-// }, [history, isAuthenticated]);
+      
 };
-const checkLogin = isAuthenticated
-const checkLogin2 = currentlyLoggedIn
-console.log(checkLogin, currentlyLoggedIn);
-
-  return (
+// console.log(isAuthenticated);
+console.log(currentlyLoggedIn);
+  if(isAuthenticated == false)
+  {
+  return (    
     <div id="Login">
       <form onSubmit={submitHandler}>
         <h3>Sign In</h3>
@@ -186,7 +119,15 @@ console.log(checkLogin, currentlyLoggedIn);
           </div>
     </div>
   );
+}else if (isAuthenticated == true)
+{
+  return(
+  <Navigate to="/"/>
+  // window.history.replaceState(null, "New Page Title", "http://localhost:3000/")
+  )
 };
+};
+
 
 
 export default Login;
