@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import {Card, Col, Container, Image, ListGroup, Row, Title} from "react-bootstrap"
 import imageExample from "../Image/Logo.PNG";
 import cartItems from "./Data/ismet3.json"
 
-export const AddDetails = () => {
+export const AddPersonalDetails = () => {
 
     const [firstName, setFirstName] = useState("");
 
@@ -35,6 +36,7 @@ export const AddDetails = () => {
         }
 
         console.log({person})
+        //axios.post(`https://localhost:7117/api/CustomerAPI/`, {person})
     }
 
     const handleSubmit = (e) => {
