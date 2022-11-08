@@ -1,35 +1,25 @@
-import React from "react";
-import imageExample from "../Image/Logo.PNG";
-import cartItems from "./Data/ismet3.json"
+import axios from "axios";
+import { Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export class MyAccount extends React.Component {
+export const MyAccount = () => {
 
-    
-  
 
-    constructor(props) {
-        super(props)
-        
-            this.state = {
-    
-        };
 
-    }
+    const [data, setData] = useState([]);
+    const getData = async () => {
+      const { data } = await axios.get(`https://localhost:7117/api/CustomerAPI/1`);
+      setData(data);
+      console.log(data);
+      
+    };
+    useEffect(() => {
+      getData();
+    }, []);
+
+
    
-       
-componentDidMount(){
-   
-}
-
-render(){
-    const{
-        
-    } = this.state;
-       
-    const addressPage = () => {
-
-    }
     
         return (
             <div className="container container-sm">
@@ -41,47 +31,72 @@ render(){
                 <div className="px-3 d-flex justify-content-start">You have not added any personal details.
                    
                 </div>
+               
+              
+
+
+                {/* IF the person has details, show the div section below. */}
+
+                        {data.map((customer) => (
+                            <div className="d-flex flex-column">
+ 
+                            <table className="table w-50">
+                            <thead>
+                                <tr>
+                                    <th style={{textAlign: "left"}}>Personal details</th>
+                                    <th style={{textAlign: "left"}}>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th style={{textAlign: "left"}}>First name</th>
+                                    <td style={{textAlign: "left"}}>{customer.firstName}</td>
+                                </tr>
+                                <tr>
+                                    <th>Last name</th>
+                                    <td>{customer.lastName}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone number</th>   
+                                    <td>{customer.phoneNumber}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address</th>
+                                    <td>{customer.address}</td>
+                                </tr>
+                                <tr>
+                                    <th>ZIP</th>
+                                    <td>{customer.zipCode}</td>
+                                </tr>
+                                <tr>
+                                    <th>Residence</th>
+                                    <td>{customer.city}</td>
+                                </tr>
+                                <tr>
+                                    <th>Country</th>
+                                    <td>{customer.country}</td>
+                                </tr>
+                                <tr>
+                                    <th>Mail address</th>
+                                    <td>{customer.email}</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                            </div>
+                            
+                           
+                        ))}
+       
 
                 <div className="px-3 d-flex justify-content-start">
+                    <Link className="btn btn-primary" to={`/AddPaymentMethod/`}>Add payment method</Link>
+                    <Link className="btn btn-primary" to={`/AddPersonalDetails/`}>Add personal details</Link>
                     <a href="#"> Change password</a>
                 </div>
-
-                <div className="px-3 d-flex justify-content-start">
-                    <a href="#"> Log out </a>
                 </div>
-
-                <div className="px-3 d-flex justify-content-start">
-
-                </div>
-
-                <div className="px-1 d-flex justify-content-between">
-                    <div className="d-flex flex-column" style={{marginLeft: "12px"}}>
-                        <Link className="btn btn-primary my-1" to={`/AddShippingAddress/`}>Add shipping address</Link>
-                        <Link className="btn btn-primary my-1">Add billing details</Link>
-
-
-                    
-                </div>
-
-
-              
-            
-
-                <div className="mx-auto my-auto">
-                    
-
-                    
-                           
-                
-
-                </div>
-                </div>
-            </div>
-               
 
 
 
         );
-            
     }
-}
+    
