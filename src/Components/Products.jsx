@@ -1,7 +1,6 @@
 import React from "react";
 import myData from "./Data/ismet.json";
 
-import joj from "../Images/Headphones1.jpg";
 import {Card, Col, Row, Container} from "react-bootstrap";
 
 
