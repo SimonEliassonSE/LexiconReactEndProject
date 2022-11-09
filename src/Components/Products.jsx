@@ -1,7 +1,7 @@
 import React from "react";
 import myData from "./Data/ismet.json";
-import products from "./Data/ismet2.json";
-import joj from "../Image/Logo.PNG";
+
+import joj from "../Images/Headphones1.jpg";
 import {Card, Col, Row, Container} from "react-bootstrap";
 
 
@@ -20,16 +20,24 @@ export class Products extends React.Component {
     description: "",
     productSaldo:0,
     img:"",
-    brand:""
+    brand:"",
+    products:[]
         };
 
     }
 
-
+    refreshList() {
+      fetch("https://localhost:7117/api/ProductAPI")
+        .then((response) => response.json())
+        .then((data) => {
+          this.setState({ products: data });
+                       
+        });
+    }
 
        
 componentDidMount(){
-
+  this.refreshList();
    
 }
 
@@ -44,7 +52,7 @@ detailsClick(product) {
     price: product.price,
     description: product.description,
     productSaldo: product.productSaldo,
-    img: product.img,
+    img:".."+ product.img,
     brand:product.brand
 
   });
@@ -66,7 +74,8 @@ render(){
       description,
       productSaldo,
       img,
-      brand
+      brand,
+      products
     } =this.state;
        
     
@@ -110,7 +119,8 @@ render(){
                                    {products.map((product) => (
                                        <Col>
                                        <Card key={product.productId} border="dark">
-                                           <Card.Img variant="top" src={joj} style={{ width: 200, height: 150 }}></Card.Img>
+
+                                           <Card.Img variant="top" src={`..${product.img}`}  style={{ width: 200, height: 150 }}></Card.Img>
                                            <Card.Body>
                                                <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
                                                    <span className="fs-4">{product.name}</span>
@@ -134,18 +144,18 @@ render(){
 
 
            <div id="exampleModel" class="modal" tabindex="-1">
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Details</h5>
+          <div className="modal-dialog modal-xl">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Details</h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
                 <div>
                   <table className="table table-striped">
                     <thead>
@@ -169,7 +179,7 @@ render(){
                         <td>{price}</td>
                         <td>{description}</td>
                         <td>{productSaldo}</td>
-                        <td>{img}</td>
+                        <td><img src={img} style={{ width:50, height: 50 }}/></td>
                         <td>{brand}</td>
                       
                           
@@ -179,10 +189,10 @@ render(){
                   </table>
                 </div>
               </div>
-              <div class="modal-footer">
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Close
