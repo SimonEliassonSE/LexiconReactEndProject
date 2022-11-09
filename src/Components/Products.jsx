@@ -1,81 +1,41 @@
-import React from "react";
+import React, {useState} from "react";
 import myData from "./Data/ismet.json";
-
+import axios from "axios";
+import { useEffect } from "react";
 import {Card, Col, Row, Container} from "react-bootstrap";
 
 
-export class Products extends React.Component {
+export const Products = () => {
 
-    
-  
 
-    constructor(props) {
-        super(props)
-        
-  this.state = {
-    productId:0,
-    name:"",
-    price:0,
-    description: "",
-    productSaldo:0,
-    img:"",
-    brand:"",
-    products:[]
-        };
 
-    }
+const [products, setProducts] = useState([]);
 
-    refreshList() {
-      fetch("https://localhost:7117/api/ProductAPI")
-        .then((response) => response.json())
-        .then((data) => {
-          this.setState({ products: data });
-                       
-        });
-    }
+const [productDetails, setProductDetails] = useState([]);
 
-       
-componentDidMount(){
-  this.refreshList();
+
+
+const getProducts = async () => {
+  const { data } = await axios.get(`https://localhost:7117/api/ProductAPI/`);
+  setProducts(data);
+  console.log(data);
+};
+
+useEffect(() => {
+  getProducts();
+}, []);
+
+
+
+
+const addProduct = () => {
+  alert("Success!")
+}
+
+
+
+
    
-}
-
-
-detailsClick(product) {
-
-  if (product.productId != null){
-  
-   this.setState({
-    productId : product.productId,
-    name: product.name,
-    price: product.price,
-    description: product.description,
-    productSaldo: product.productSaldo,
-    img:".."+ product.img,
-    brand:product.brand
-
-  });
-  } 
-}
-
-render(){
-  const addProduct = () => {
-    alert("Product added.")
-}
-
-
-
-
-    const{
-      productId,
-      name,
-      price,
-      description,
-      productSaldo,
-      img,
-      brand,
-      products
-    } =this.state;
        
     
         return (
@@ -99,7 +59,7 @@ render(){
                
 
                <div className="d-flex justify-content-start">
-                   <ul className="list-group list-unstyled list-group-flush">
+               <ul className="list-group list-unstyled list-group-flush">
                        {myData.map((category) => (
                            <li key={category.categoryId}>
                                <a href="http://localhost:3000/Products" className="list-group-item list-group-item-action">
@@ -111,6 +71,7 @@ render(){
 
                        )}
                    </ul>
+
 
                    <div className="d-flex justify-content-center">
                            <Container>
@@ -128,7 +89,7 @@ render(){
                                                <Card.Link  className="btn btn-primary"
                                                  data-bs-toggle="modal"
                                                  data-bs-target="#exampleModel"
-                                                 onClick={() => this.detailsClick(product)}
+                                                 onClick={() => alert("iekW")}
                                                >Details</Card.Link>
                                                <Card.Link onClick={addProduct} className="btn btn-outline-dark">Add to cart</Card.Link>
                                            </Card.Body>
@@ -170,20 +131,24 @@ render(){
                       </tr>
                     </thead>
                     <tbody>
-                      <tr> 
      
-      
-                        <td>{productId}</td>
-                        <td>{name}</td>
-                        <td>{price}</td>
-                        <td>{description}</td>
-                        <td>{productSaldo}</td>
-                        <td><img src={img} style={{ width:50, height: 50 }}/></td>
-                        <td>{brand}</td>
+                        {products.map((product) => (
+                          <tr key={product.productId}>
+
+                              <td>{product.productId}</td>
+                             <td>{product.name}</td>
+                             <td>{product.price}</td>
+                             <td>{product.description}</td>
+                             <td>{product.productSaldo}</td>
+                             <td><img src={product.img} style={{ width:50, height: 50 }}/></td>
+                             <td>{product.brand}</td>
+
+                            </tr>
+                        ))}
+                       
                       
                           
                  
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -207,5 +172,5 @@ render(){
            </div>
         );
             
-    }
-}
+    
+                        }
