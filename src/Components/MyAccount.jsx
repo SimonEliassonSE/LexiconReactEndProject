@@ -5,15 +5,13 @@ import { Link } from "react-router-dom";
 
 export const MyAccount = () => {
 
-
-
     const [data, setData] = useState([]);
     const getData = async () => {
       const { data } = await axios.get(`https://localhost:7117/api/CustomerAPI/1`);
       setData(data);
       console.log(data);
-      
     };
+    
     useEffect(() => {
       getData();
     }, []);
@@ -37,6 +35,7 @@ export const MyAccount = () => {
 
                 {/* IF the person has details, show the div section below. */}
 
+                    {/* 
                         {data.map((customer) => (
                             <div className="d-flex flex-column">
  
@@ -86,13 +85,16 @@ export const MyAccount = () => {
                             
                            
                         ))}
+                        */}
        
 
-                <div className="px-3 d-flex justify-content-start">
-                    <Link className="btn btn-primary" to={`/AddPaymentMethod/`}>Add payment method</Link>
-                    <Link className="btn btn-primary" to={`/AddPersonalDetails/`}>Add personal details</Link>
+                    <div className="d-flex justify-content-start px-3 py-1">
+                    <Link className="btn btn-primary py-auto" to={`/AddPaymentMethod/`}>Add payment method</Link>
+                    </div>
+                    <div className="d-flex justify-content-start px-3 py-1">
+                    <Link className="btn btn-primary py-auto" to={`/AddPersonalDetails/`}>Add personal details</Link>
+                    </div>
                     <a href="#"> Change password</a>
-                </div>
                 </div>
 
 

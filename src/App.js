@@ -2,7 +2,6 @@ import "./App.css";
 import { Homepage } from "./Components/Homepage";
 import { Products } from "./Components/Products";
 import { MyAccount } from "./Components/MyAccount";
-import { AddShippingAddress } from "./Components/AddShippingAddress";
 import { AddPersonalDetails } from "./Components/AddPersonalDetails";
 import { NavigationBar } from "./Components/NavigationBar";
 import { Cart } from "./Components/Cart";
@@ -171,7 +170,7 @@ function App() {
         />
         <Route path="/MyAccount" element={<MyAccount />} />
         <Route path="/AddPaymentMethod" element={<AddPaymentMethod />} />
-        <Route path="/AddShippingAddress" element={<AddShippingAddress />} />
+        <Route path="/AddPersonalDetails" element={<AddPersonalDetails />} />
 
         <Route
           path="/Signup"
