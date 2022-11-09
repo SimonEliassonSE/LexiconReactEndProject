@@ -12,6 +12,8 @@ export const ProductArray = createContext(null);
 export const CategoryArray = createContext(null);
 
 export const CurrentlyLoggedin = createContext(null);
+export const CustomerData = createContext(null);
+export const CustomerCreditcardData = createContext(null);
 export const UserAuthenticator = createContext(null);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -22,10 +22,26 @@ import {
   CategoryArray,
   UserAuthenticator,
   CurrentlyLoggedin,
+  CustomerData,
+  CustomerCreditcardData,
 } from "./index";
 import { AddPaymentMethod } from "./Components/AddPaymentMethod";
 
 function App() {
+  const [customerData, setCustomerData] = useState([]);
+
+  const providerCustomerData = useMemo(
+    () => ({ customerData, setCustomerData }),
+    [customerData, setCustomerData]
+  );
+
+  const [customerCreditcardData, setCustomerCreditcardData] = useState([]);
+
+  const providerCustomerCreditcardData = useMemo(
+    () => ({ customerCreditcardData, setCustomerCreditcardData }),
+    [customerCreditcardData, setCustomerCreditcardData]
+  );
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const providerUserAuthenticator = useMemo(
@@ -54,10 +70,10 @@ function App() {
     [customerList, setCustomerList]
   );
 
-  const [CreditcardList, setCreditcardList] = useState([]);
+  const [creditcardList, setCreditcardList] = useState([]);
 
   const providerCreditcard = useMemo(
-    () => ({ CreditcardList, setCreditcardList }),
+    () => ({ creditcardList, setCreditcardList }),
     [customerList, setCustomerList]
   );
 
@@ -87,7 +103,7 @@ function App() {
     };
     getUsers();
   }, [isAuthenticated]);
-  console.log(userList);
+  // console.log(userList);
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -101,7 +117,7 @@ function App() {
     };
     getCustomers();
   }, []);
-  console.log(customerList);
+  // console.log(customerList);
 
   useEffect(() => {
     const getCreditcard = async () => {
@@ -115,7 +131,7 @@ function App() {
     };
     getCreditcard();
   }, []);
-  console.log(CreditcardList);
+  // console.log(CreditcardList);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -129,7 +145,7 @@ function App() {
     };
     getProducts();
   }, []);
-  console.log(ProductList);
+  // console.log(ProductList);
 
   useEffect(() => {
     const getCategorys = async () => {
@@ -143,15 +159,19 @@ function App() {
     };
     getCategorys();
   }, []);
-  console.log(CategoryList);
+  // console.log(CategoryList);
 
   return (
     <div className="App">
-      <CurrentlyLoggedin.Provider value={providerCurrentlyLoggin}>
-        <UserAuthenticator.Provider value={providerUserAuthenticator}>
-          <NavigationBar />
-        </UserAuthenticator.Provider>
-      </CurrentlyLoggedin.Provider>
+      <CustomerCreditcardData.Provider value={providerCustomerCreditcardData}>
+        <CustomerData.Provider value={providerCustomerData}>
+          <CurrentlyLoggedin.Provider value={providerCurrentlyLoggin}>
+            <UserAuthenticator.Provider value={providerUserAuthenticator}>
+              <NavigationBar />
+            </UserAuthenticator.Provider>
+          </CurrentlyLoggedin.Provider>
+        </CustomerData.Provider>
+      </CustomerCreditcardData.Provider>
       <Routes>
         <Route index path="/" element={<Homepage />} />
         <Route path="/Products" element={<Products />} />
@@ -159,16 +179,43 @@ function App() {
         <Route
           path="/Login"
           element={
-            <UserArray.Provider value={providerUsers}>
-              <UserAuthenticator.Provider value={providerUserAuthenticator}>
-                <CurrentlyLoggedin.Provider value={providerCurrentlyLoggin}>
-                  <Login />
-                </CurrentlyLoggedin.Provider>
-              </UserAuthenticator.Provider>
-            </UserArray.Provider>
+            <CustomerCreditcardData.Provider
+              value={providerCustomerCreditcardData}
+            >
+              <CustomerData.Provider value={providerCustomerData}>
+                <CreditcardArray.Provider value={providerCreditcard}>
+                  <CustomerArray.Provider value={providerCustomer}>
+                    <UserArray.Provider value={providerUsers}>
+                      <UserAuthenticator.Provider
+                        value={providerUserAuthenticator}
+                      >
+                        <CurrentlyLoggedin.Provider
+                          value={providerCurrentlyLoggin}
+                        >
+                          <Login />
+                        </CurrentlyLoggedin.Provider>
+                      </UserAuthenticator.Provider>
+                    </UserArray.Provider>
+                  </CustomerArray.Provider>
+                </CreditcardArray.Provider>
+              </CustomerData.Provider>
+            </CustomerCreditcardData.Provider>
           }
         />
-        <Route path="/MyAccount" element={<MyAccount />} />
+        <Route
+          path="/MyAccount"
+          element={
+            <UserAuthenticator.Provider value={providerUserAuthenticator}>
+              <CustomerCreditcardData.Provider
+                value={providerCustomerCreditcardData}
+              >
+                <CustomerData.Provider value={providerCustomerData}>
+                  <MyAccount />
+                </CustomerData.Provider>
+              </CustomerCreditcardData.Provider>
+            </UserAuthenticator.Provider>
+          }
+        />
         <Route path="/AddPaymentMethod" element={<AddPaymentMethod />} />
         <Route path="/AddPersonalDetails" element={<AddPersonalDetails />} />
 
@@ -182,7 +229,6 @@ function App() {
             </CurrentlyLoggedin.Provider>
           }
         />
-
       </Routes>
     </div>
   );
