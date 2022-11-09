@@ -6,9 +6,9 @@ import { AddShippingAddress } from "./Components/AddShippingAddress";
 import { AddPersonalDetails } from "./Components/AddPersonalDetails";
 import { NavigationBar } from "./Components/NavigationBar";
 import { Cart } from "./Components/Cart";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Components/Login";
-import { Signup } from "./Components/Signup";
+import Signup from "./Components/Signup";
 import { useState, useMemo, useEffect } from "react";
 import { hasAuthenticated } from "./services/AuthApi";
 import Auth from "./Context/Auth";
@@ -34,7 +34,7 @@ function App() {
     [isAuthenticated, setIsAuthenticated]
   );
 
-  const [currentlyLoggedIn, setcurrentlyLoggedIn] = useState(false);
+  const [currentlyLoggedIn, setcurrentlyLoggedIn] = useState([]);
 
   const providerCurrentlyLoggin = useMemo(
     () => ({ currentlyLoggedIn, setcurrentlyLoggedIn }),
@@ -87,7 +87,7 @@ function App() {
         });
     };
     getUsers();
-  }, []);
+  }, [isAuthenticated]);
   console.log(userList);
 
   useEffect(() => {
@@ -105,7 +105,7 @@ function App() {
   console.log(customerList);
 
   useEffect(() => {
-    const getCustomers = async () => {
+    const getCreditcard = async () => {
       await Axios.get("https://localhost:7117/api/CreditcardAPI")
         .then((res) => {
           setCreditcardList(res.data);
@@ -114,12 +114,12 @@ function App() {
           console.log(err);
         });
     };
-    getCustomers();
+    getCreditcard();
   }, []);
   console.log(CreditcardList);
 
   useEffect(() => {
-    const getCustomers = async () => {
+    const getProducts = async () => {
       await Axios.get("https://localhost:7117/api/ProductAPI")
         .then((res) => {
           setProductList(res.data);
@@ -128,7 +128,7 @@ function App() {
           console.log(err);
         });
     };
-    getCustomers();
+    getProducts();
   }, []);
   console.log(ProductList);
 
@@ -147,9 +147,12 @@ function App() {
   console.log(CategoryList);
 
   return (
-    // <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
     <div className="App">
-      <NavigationBar />
+      <CurrentlyLoggedin.Provider value={providerCurrentlyLoggin}>
+        <UserAuthenticator.Provider value={providerUserAuthenticator}>
+          <NavigationBar />
+        </UserAuthenticator.Provider>
+      </CurrentlyLoggedin.Provider>
       <Routes>
         <Route index path="/" element={<Homepage />} />
         <Route path="/Products" element={<Products />} />
@@ -169,11 +172,20 @@ function App() {
         <Route path="/MyAccount" element={<MyAccount />} />
         <Route path="/AddPaymentMethod" element={<AddPaymentMethod />} />
         <Route path="/AddShippingAddress" element={<AddShippingAddress />} />
-        <Route path="/AddPersonalDetails" element={<AddPersonalDetails />} />
-        <Route path="/Signup" element={<Signup />} />
+
+        <Route
+          path="/Signup"
+          element={
+            <CurrentlyLoggedin.Provider value={providerCurrentlyLoggin}>
+              <UserAuthenticator.Provider value={providerUserAuthenticator}>
+                <Signup />
+              </UserAuthenticator.Provider>
+            </CurrentlyLoggedin.Provider>
+          }
+        />
+
       </Routes>
     </div>
-    // </Auth.Provider>
   );
 }
 
