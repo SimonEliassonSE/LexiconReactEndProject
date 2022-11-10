@@ -24,6 +24,11 @@ function Login()
   const [enteredPassword, setenteredPassword] = useState("");
   const [tempCreditcard, setTempCreditcard] = useState([]);
 
+ const [errorsLogin, setErrorsLogin] = useState(''); 
+
+
+
+
   const userNameChangeHandler = (event) => {
     setenteredUserName(event.target.value);
   };
@@ -102,9 +107,11 @@ function Login()
       // console.log(el) 
       if(el.email == enteredUserName)
       {
+        
         console.log("Match found, validating input!")
         validateUserInput();
       }     
+
       // else {
       //   console.log("No match found!")
       // }
@@ -121,6 +128,11 @@ function Login()
 //         setTempCreditcard([...tempCreditcard, el]);
 //         // setCustomerCreditcardData([el]);        
 //       }
+          else
+          {
+            setErrorsLogin('Please make sure that the email or password is correct..');
+            console.log("No match found!");     
+          }
 //   });      
 // }
 
@@ -165,22 +177,43 @@ console.log(currentlyLoggedIn);
             Submit
           </button>
         </div>
-      
+     
       </form>
+      <div className="errorMessage">
+        {errorsLogin && 
+        <div class="alert alert-danger" role="alert">
+       {errorsLogin}
+      </div>
+      }
+        </div>
+
+
       <div className="text-center">
           <p>
             Not a member? <a href="http://localhost:3000/Signup">Register</a>
           </p>
           </div>
     </div>
-  );
-}else if (isAuthenticated == true)
+
+)
+
+
+}
+
+
+
+else if (isAuthenticated == true)
 {
   return(
   <Navigate to="/"/>
   // window.history.replaceState(null, "New Page Title", "http://localhost:3000/")
   )
 };
+
+
+
+
+
 };
 
 
