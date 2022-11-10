@@ -24,10 +24,26 @@ import {
   CurrentlyLoggedin,
   CustomerData,
   CustomerCreditcardData,
+  CustomerArrayGotUpdated,
+  CustomerCreditcardArrayGotUpdated,
 } from "./index";
 import { AddPaymentMethod } from "./Components/AddPaymentMethod";
 
 function App() {
+  const [creditcardArrayUpdate, setCreditcardArrayUpdate] = useState(false);
+
+  const providerCreditcardArrayUpdate = useMemo(
+    () => ({ creditcardArrayUpdate, setCreditcardArrayUpdate }),
+    [creditcardArrayUpdate, setCreditcardArrayUpdate]
+  );
+
+  const [arrayUpdate, setArrayUpdate] = useState(false);
+
+  const providerArrayUpdate = useMemo(
+    () => ({ arrayUpdate, setArrayUpdate }),
+    [arrayUpdate, setArrayUpdate]
+  );
+
   const [customerData, setCustomerData] = useState([]);
 
   const providerCustomerData = useMemo(
@@ -74,7 +90,7 @@ function App() {
 
   const providerCreditcard = useMemo(
     () => ({ creditcardList, setCreditcardList }),
-    [customerList, setCustomerList]
+    [creditcardList, setCreditcardList]
   );
 
   const [ProductList, setProductList] = useState([]);
@@ -110,13 +126,14 @@ function App() {
       await Axios.get("https://localhost:7117/api/CustomerAPI")
         .then((res) => {
           setCustomerList(res.data);
+          console.log("Customer was updated");
         })
         .catch((err) => {
           console.log(err);
         });
     };
     getCustomers();
-  }, []);
+  }, [arrayUpdate]);
   // console.log(customerList);
 
   useEffect(() => {
@@ -124,14 +141,15 @@ function App() {
       await Axios.get("https://localhost:7117/api/CreditcardAPI")
         .then((res) => {
           setCreditcardList(res.data);
+          console.log("Creditcardlist was updated");
         })
         .catch((err) => {
           console.log(err);
         });
     };
     getCreditcard();
-  }, []);
-  // console.log(CreditcardList);
+  }, [creditcardArrayUpdate]);
+  // console.log(creditcardList);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -145,7 +163,7 @@ function App() {
     };
     getProducts();
   }, []);
-  // console.log(ProductList);
+  console.log(ProductList);
 
   useEffect(() => {
     const getCategorys = async () => {
@@ -205,19 +223,56 @@ function App() {
         <Route
           path="/MyAccount"
           element={
-            <UserAuthenticator.Provider value={providerUserAuthenticator}>
-              <CustomerCreditcardData.Provider
-                value={providerCustomerCreditcardData}
-              >
-                <CustomerData.Provider value={providerCustomerData}>
-                  <MyAccount />
-                </CustomerData.Provider>
-              </CustomerCreditcardData.Provider>
-            </UserAuthenticator.Provider>
+            <CustomerCreditcardArrayGotUpdated.Provider
+              value={providerCreditcardArrayUpdate}
+            >
+              <CustomerArray.Provider value={providerCustomer}>
+                <UserAuthenticator.Provider value={providerUserAuthenticator}>
+                  <CustomerCreditcardData.Provider
+                    value={providerCustomerCreditcardData}
+                  >
+                    <CustomerData.Provider value={providerCustomerData}>
+                      <CurrentlyLoggedin.Provider
+                        value={providerCurrentlyLoggin}
+                      >
+                        <CustomerArrayGotUpdated.Provider
+                          value={providerArrayUpdate}
+                        >
+                          <CreditcardArray.Provider value={providerCreditcard}>
+                            <MyAccount />
+                          </CreditcardArray.Provider>
+                        </CustomerArrayGotUpdated.Provider>
+                      </CurrentlyLoggedin.Provider>
+                    </CustomerData.Provider>
+                  </CustomerCreditcardData.Provider>
+                </UserAuthenticator.Provider>
+              </CustomerArray.Provider>
+            </CustomerCreditcardArrayGotUpdated.Provider>
           }
         />
-        <Route path="/AddPaymentMethod" element={<AddPaymentMethod />} />
-        <Route path="/AddPersonalDetails" element={<AddPersonalDetails />} />
+        <Route
+          path="/AddPaymentMethod"
+          element={
+            <CustomerCreditcardData.Provider
+              value={providerCustomerCreditcardData}
+            >
+              <CustomerData.Provider value={providerCustomerData}>
+                <AddPaymentMethod />
+              </CustomerData.Provider>
+            </CustomerCreditcardData.Provider>
+          }
+        />
+
+        <Route
+          path="/AddPersonalDetails"
+          element={
+            <CurrentlyLoggedin.Provider value={providerCurrentlyLoggin}>
+              <CustomerData.Provider value={providerCustomerData}>
+                <AddPersonalDetails />
+              </CustomerData.Provider>
+            </CurrentlyLoggedin.Provider>
+          }
+        />
 
         <Route
           path="/Signup"

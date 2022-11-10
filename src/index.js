@@ -15,6 +15,8 @@ export const CurrentlyLoggedin = createContext(null);
 export const CustomerData = createContext(null);
 export const CustomerCreditcardData = createContext(null);
 export const UserAuthenticator = createContext(null);
+export const CustomerArrayGotUpdated = createContext(null);
+export const CustomerCreditcardArrayGotUpdated = createContext(null);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

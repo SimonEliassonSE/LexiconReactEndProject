@@ -14,8 +14,8 @@ function Login()
   const {userList } = useContext(UserArray)
   const {isAuthenticated, setIsAuthenticated} = useContext(UserAuthenticator);
   const {currentlyLoggedIn, setcurrentlyLoggedIn} = useContext(CurrentlyLoggedin);
-  const {customerList} = useContext(CustomerArray);
-  const {creditcardList} = useContext(CreditcardArray);
+  const {customerList, setCustomerList} = useContext(CustomerArray);
+  const {creditcardList, setCreditcardList} = useContext(CreditcardArray);
   const {customerData, setCustomerData} = useContext(CustomerData)
   const {customerCreditcardData, setCustomerCreditcardData} = useContext(CustomerCreditcardData)
 
@@ -80,8 +80,12 @@ function Login()
         {
           // if the userName & password exist in backend we set isAuthenticated to true, we add the password and username to curerentlyLoggedin and use this -->
           // info to get customer & creditcard data if the user has any (recently created users wont have any customer or creditcard data!)
-          setIsAuthenticated(true);      
-          setcurrentlyLoggedIn([enteredUserName, enteredPassword]);
+          setIsAuthenticated(true);
+          const c = {
+            UserName: enteredUserName,
+            Password: enteredPassword,
+          }      
+          setcurrentlyLoggedIn([c]);
           findCustomerData(); 
           findCustomerCreditcardData(); // This function dose only add 1 creditcard, 1 user can have several creditcards. If finished in time fix this. 
         }
@@ -120,9 +124,10 @@ function Login()
 //   });      
 // }
 
-console.log(creditcardList);
+console.log("creidcardList", creditcardList);
 console.log("customerData List In submit",customerData);
-console.log("customerCreditcardData List In submit ",customerCreditcardData);       
+console.log("customerCreditcardData List In submit ",customerCreditcardData);   
+console.log(currentlyLoggedIn);    
 
   if(isAuthenticated == false)
   {

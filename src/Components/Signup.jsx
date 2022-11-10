@@ -46,7 +46,11 @@ function Signup()
         else if(response.status == 200)
         {
           setIsAuthenticated(true);
-          setcurrentlyLoggedIn([enteredUserName, enteredPassword])
+          const c = {
+            UserName: enteredUserName,
+            Password: enteredPassword,
+          }
+          setcurrentlyLoggedIn([c])
         }
 
       })
