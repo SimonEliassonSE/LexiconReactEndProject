@@ -8,25 +8,23 @@ import { useState } from "react";
 export const AddPaymentMethod = () => {
 
     const [creditNumber, setCreditNumber] = useState("");
-
     const [ccv, setCCV] = useState("");
-
     const [bank, setBank] = useState("");
+    
+    // const addBilling = () => {
+    //     var billing = {
+    //         CreditNumber: creditNumber,
+    //         CCV: ccv,
+    //         Bank: bank
+    //     }
 
-    const addBilling = () => {
-        var billing = {
-            CreditNumber: creditNumber,
-            CCV: ccv,
-            Bank: bank
-        }
+    //     console.log({billing});
+    // }
 
-        console.log({billing});
-    }
-
-    const handleSubmit = (e) => {
-        addBilling();
-        e.preventDefault();
-    }
+    // const handleSubmit = (e) => {
+    //     addBilling();
+    //     e.preventDefault();
+    // }
 
 
             return (
@@ -38,7 +36,8 @@ export const AddPaymentMethod = () => {
 
                         <div className="px-1 mx-3 rounded" style={{backgroundColor: "gray", width: "20%"}}>
                             <div className="d-flex mx-1 py-2">
-                                <form className="px-3 py-2" onSubmit={handleSubmit}>
+                                <form className="px-3 py-2">
+                                {/* onSubmit={handleSubmit} */}
                                     <p className="display-6">FORM</p>
                                     <div className="form-group">
                                             <label style={{float: "left", paddingLeft: "5px"}}>Credit card number</label>
@@ -46,8 +45,8 @@ export const AddPaymentMethod = () => {
                                                 type="text" 
                                                 className="form-control form-control-sm"
                                                 name="creditNumber"
-                                                value={creditNumber}
-                                                onChange={(e) => setCreditNumber(e.target.value)}
+                                                // value={creditNumber}
+                                                // onChange={(e) => setCreditNumber(e.target.value)}
                                                 required
                                             />
                                         </div>
@@ -58,8 +57,8 @@ export const AddPaymentMethod = () => {
                                                 type="password" 
                                                 className="form-control form-control-sm"
                                                 name="ccv"
-                                                value={ccv}
-                                                onChange={(e) => setCCV(e.target.value)}
+                                                // value={ccv}
+                                                // onChange={(e) => setCCV(e.target.value)}
                                                 required
                                                 />
                                         </div>
@@ -69,26 +68,19 @@ export const AddPaymentMethod = () => {
                                                 type="text" 
                                                 className="form-control form-control-sm"
                                                 name="bank"
-                                                value={bank}
-                                                onChange={(e) => setBank(e.target.value)}
+                                                // value={bank}
+                                                // onChange={(e) => setBank(e.target.value)}
                                                 required
                                                 />
                                         </div>
                                     </Row>
                                     <button className="btn btn-success">Submit</button>
                                 </form>
-
-
-
-
                         </div>
-
-                        
                         </div>
                         <div className="d-flex justify-content-start p-3">
-                        <Link className="btn btn-primary" to={`/MyAccount/`}>Return to account</Link>
+                            <Link className="btn btn-primary" to={`/MyAccount/`}>Return to account</Link>
                         </div>
-
                     </div>
             );
                 

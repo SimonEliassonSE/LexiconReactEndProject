@@ -2,8 +2,9 @@ import '../App.css';
 import { Link } from 'react-router-dom';
 // import Auth from '../Context/Auth';
 import { useContext } from 'react';
-import { logout } from '../services/AuthApi';
-import { UserAuthenticator, CurrentlyLoggedin } from "../index";
+// import { logout } from '../services/AuthApi';
+import { UserAuthenticator, CurrentlyLoggedin ,CustomerData ,CustomerCreditcardData } from "../index";
+
 
 
 
@@ -13,13 +14,19 @@ import { UserAuthenticator, CurrentlyLoggedin } from "../index";
 
   const {isAuthenticated, setIsAuthenticated} = useContext(UserAuthenticator);
   const {currentlyLoggedIn, setcurrentlyLoggedIn} = useContext(CurrentlyLoggedin);
+  const {customerData, setCustomerData} = useContext(CustomerData)
+  const {customerCreditcardData, setCustomerCreditcardData} = useContext(CustomerCreditcardData)
 
 const handleLogout = () =>{
   if(isAuthenticated == true)
   {setIsAuthenticated(false);
-  setcurrentlyLoggedIn([])}
-  // console.log(currentlyLoggedIn);
+  setcurrentlyLoggedIn([])
+  setCustomerData([])
+  setCustomerCreditcardData([])
 }
+    
+}
+
 
 if(isAuthenticated == true)
 {
