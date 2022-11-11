@@ -438,38 +438,219 @@ if(isAuthenticated == true)
                 <div className="p-3">
                     <h2 className="d-flex justify-content-start">My account</h2>
                 </div>
-                             
-                <h5 className="d-flex justify-content-start">My customer details</h5>
-                <div className="d-flex justify-content-start px-3 py-1">                    
 
-                    {customerData.map((customer) => (
-                        <div className="card" key={customer.customerId}>
-                            <div className="card-body form-group">
-                                <label className="form-label">First name</label>
-                                <input className="form-control" value={customer.firstName} readOnly/>
-                                <label className="form-label">Last name</label>
-                                <input className="form-control" value={customer.lastName} readOnly/>
-                                <label className="form-label">Email</label>
-                                <input className="form-control" value={customer.email} readOnly/>
-                                <label className="form-label">Phonenumber</label>
-                                <input className="form-control" value={customer.phoneNumber} readOnly/>
-                                <label className="form-label">City</label>
-                                <input className="form-control" value={customer.city} readOnly/>
-                                <label className="form-label">Country</label>
-                                <input className="form-control" value={customer.country} readOnly/>
-                                <label className="form-label">Zipcode</label>
-                                <input className="form-control" value={customer.zipCode} readOnly/>
-                                <label className="form-label">Adress</label>
-                                <input className="form-control" value={customer.address} readOnly/>
-                            </div>                            
-                        </div>                           
-                       ))}
+                
+                {customerData.map((customer) => (
+                    <div key={customer.customerId}>
+                    <div align="left">
 
+                        <p className="px-4 lead"><i className="bi bi-person-circle"></i>
+                            <b> {customer.firstName} {customer.lastName}</b>
+                            </p>
                     </div>
-                    <div className="d-flex justify-content-start px-3 py-1">
 
+                        <div className="d-flex justify-content-start">
+                        <p className="px-4 lead"><i className="bi bi-envelope-fill"></i><b> {customer.email}</b></p>
+                        </div>
+
+                        <div className="d-flex justify-content-start">
+                        <p align="center" className="px-4 lead"><i className="bi bi-telephone-fill"></i><b> {customer.phoneNumber}</b></p>
+                        </div>
+
+                        <div className="d-flex justify-content-start mx-4">
+                        <p className="lead"><i className="bi bi-pin-map-fill"> </i></p>
+                        <div className="d-flex flex-column" style={{paddingLeft: "6px"}} align="left">
+                            <p className="lead"><b> {customer.address}</b></p>
+                            <p className="lead"><b> {customer.zipCode} {customer.city}</b></p>
+                            <p className="lead"><b> {customer.country}</b></p>
+                            </div>
+                        </div>
+                    </div>
+
+                ))}
+                
+                {/* 
+                <div className="mx-1 w-25 mx-4 ">
+                    {customerData.map((customer) => (
+
+                        <div className="container border border-dark rounded" align="left" key={customer.customerId}>
+                                        
+                            <div className="row">
+                                <div className="col">
+                                    <b>First name</b>
+                                </div>
+                                <div className="col">
+                                    {customer.firstName}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Last name</b>
+                                </div>
+                                <div className="col">
+                                    {customer.lastName}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Mail address</b>
+                                </div>
+                                <div className="col">
+                                    {customer.email}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Phone number</b>
+                                </div>
+                                <div className="col">
+                                    {customer.phoneNumber}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Residence</b>
+                                </div>
+                                <div className="col">
+                                    {customer.city}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Country</b>
+                                </div>
+                                <div className="col">
+                                    {customer.country}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>ZIP</b>
+                                </div>
+                                <div className="col">
+                                    {customer.zipCode}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Address</b>
+                                </div>
+                                <div className="col">
+                                    {customer.address}
+                                </div>
+                            </div>
+                        
+
+
+
+                        </div>
+                    ))}
+                    
+                </div>
+
+                */}
+
+
+                {/* 
+                <div className="mx-1 w-25 mx-4 ">
+                    {customerData.map((customer) => (
+
+                        <div className="container border border-dark rounded" align="left" key={customer.customerId}>
+                                        
+                            <div className="row">
+                                <div className="col">
+                                    <b>First name</b>
+                                </div>
+                                <div className="col">
+                                    {customer.firstName}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Last name</b>
+                                </div>
+                                <div className="col">
+                                    {customer.lastName}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Mail address</b>
+                                </div>
+                                <div className="col">
+                                    {customer.email}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Phone number</b>
+                                </div>
+                                <div className="col">
+                                    {customer.phoneNumber}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Residence</b>
+                                </div>
+                                <div className="col">
+                                    {customer.city}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Country</b>
+                                </div>
+                                <div className="col">
+                                    {customer.country}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>ZIP</b>
+                                </div>
+                                <div className="col">
+                                    {customer.zipCode}
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
+                                    <b>Address</b>
+                                </div>
+                                <div className="col">
+                                    {customer.address}
+                                </div>
+                            </div>
+                        
+
+
+
+                        </div>
+                    ))}
+                    
+                </div>
+
+                */}
+
+                
+                    <h5 className="d-flex justify-content-start px-3 pt-5">Payment details</h5>
+                    <div className="d-flex justify-content-start px-3 py-1">
                     {customerCreditcardData.map((creditcard) => (
-                        <div className="card" key={creditcard.ccId}>
+                        <div className="d-flex justify-content-start card" key={creditcard.ccId}>
                             <div className="card-body form-group">
                                 <label className="form-label">Creditcard numbers</label>                            
                                 <input className="form-control" value={creditcard.creditNumber} readOnly/>                          
