@@ -435,13 +435,21 @@ if(isAuthenticated == true)
         {
             return(
                 <div className="container container-sm">
-                <div className="p-3">
-                    <h2 className="d-flex justify-content-start">My account</h2>
-                </div>
+                        <div className="d-flex justify-content-start p-3">
+                            <p className="display-6">My account</p>
+                        </div>
+                
+
+                
 
                 
                 {customerData.map((customer) => (
-                    <div key={customer.customerId}>
+                    <div key={customer.customerId} className="border border-dark rounded w-25 p-4">
+
+                    <div className="px-3">
+                        <h4 className="d-flex justify-content-start">Personal details</h4>
+                    </div>
+
                     <div align="left">
 
                         <p className="px-4 lead"><i className="bi bi-person-circle"></i>
@@ -468,203 +476,50 @@ if(isAuthenticated == true)
                     </div>
 
                 ))}
-                
-                {/* 
-                <div className="mx-1 w-25 mx-4 ">
-                    {customerData.map((customer) => (
 
-                        <div className="container border border-dark rounded" align="left" key={customer.customerId}>
-                                        
-                            <div className="row">
-                                <div className="col">
-                                    <b>First name</b>
-                                </div>
-                                <div className="col">
-                                    {customer.firstName}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Last name</b>
-                                </div>
-                                <div className="col">
-                                    {customer.lastName}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Mail address</b>
-                                </div>
-                                <div className="col">
-                                    {customer.email}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Phone number</b>
-                                </div>
-                                <div className="col">
-                                    {customer.phoneNumber}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Residence</b>
-                                </div>
-                                <div className="col">
-                                    {customer.city}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Country</b>
-                                </div>
-                                <div className="col">
-                                    {customer.country}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>ZIP</b>
-                                </div>
-                                <div className="col">
-                                    {customer.zipCode}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Address</b>
-                                </div>
-                                <div className="col">
-                                    {customer.address}
-                                </div>
-                            </div>
-                        
-
-
-
-                        </div>
-                    ))}
-                    
+                <div className="px-3 pt-3">
+                    <h4 className="d-flex justify-content-start">Payment details</h4>
                 </div>
 
-                */}
+                {customerCreditcardData.map((creditCard) => (
+                    <div key={creditCard.ccId} className="mb-3">
+                    <div align="left" className="border border-dark rounded p-4 w-50">
 
-
-                {/* 
-                <div className="mx-1 w-25 mx-4 ">
-                    {customerData.map((customer) => (
-
-                        <div className="container border border-dark rounded" align="left" key={customer.customerId}>
-                                        
-                            <div className="row">
-                                <div className="col">
-                                    <b>First name</b>
-                                </div>
-                                <div className="col">
-                                    {customer.firstName}
-                                </div>
+                        <div className="row">
+                            <div className="col">
+                            <p className="px-4 lead"><i className="bi bi-credit-card-2-front"></i>
+                                <b> {creditCard.creditNumber}</b>
+                                </p>
                             </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Last name</b>
-                                </div>
-                                <div className="col">
-                                    {customer.lastName}
-                                </div>
+                            <div className="col">
+                                <p className="px-4 lead"><i className="bi bi-credit-card-2-back"></i>
+                                <b> {creditCard.ccv}</b>
+                                </p>
                             </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Mail address</b>
-                                </div>
-                                <div className="col">
-                                    {customer.email}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Phone number</b>
-                                </div>
-                                <div className="col">
-                                    {customer.phoneNumber}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Residence</b>
-                                </div>
-                                <div className="col">
-                                    {customer.city}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Country</b>
-                                </div>
-                                <div className="col">
-                                    {customer.country}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>ZIP</b>
-                                </div>
-                                <div className="col">
-                                    {customer.zipCode}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col">
-                                    <b>Address</b>
-                                </div>
-                                <div className="col">
-                                    {customer.address}
-                                </div>
-                            </div>
-                        
-
-
-
                         </div>
-                    ))}
-                    
-                </div>
 
-                */}
+                        <div className="row">
+                            <div className="col">
+                            <p className="px-4 lead"><i className="bi bi-bank2"></i><b> {creditCard.bank} </b></p>
+                            </div>
+                            <div className="col">
+                                <p className="lead" style={{paddingLeft: "30px"}}><i className="bi bi-currency-euro"></i>
+                                    <b>{creditCard.value}</b>
+                                </p>
+                            </div>
+                        </div>
 
-                
-                    <h5 className="d-flex justify-content-start px-3 pt-5">Payment details</h5>
-                    <div className="d-flex justify-content-start px-3 py-1">
-                    {customerCreditcardData.map((creditcard) => (
-                        <div className="d-flex justify-content-start card" key={creditcard.ccId}>
-                            <div className="card-body form-group">
-                                <label className="form-label">Creditcard numbers</label>                            
-                                <input className="form-control" value={creditcard.creditNumber} readOnly/>                          
-                                <label className="form-label">ccv</label>                              
-                                <input className="form-control" value={creditcard.ccv} readOnly/>
-                                <label className="form-label">Saldo</label>                             
-                                <input className="form-control" value={creditcard.value} readOnly/>
-                                <label className="form-label">Bank</label>                            
-                                <input className="form-control" value={creditcard.bank} readOnly/>
-                            </div>                            
-                        </div>                           
-                       ))}               
+
+                        
+                        
+                    </div>
+
+                      
 
                     </div>
+
+                ))}
+                
                     {/* <a href="#"> Change password</a> */}
                     <p> Display reciptes "get the data from backend"</p>    
                 </div>     
