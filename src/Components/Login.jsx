@@ -111,10 +111,11 @@ function Login()
         console.log("Match found, validating input!")
         validateUserInput();
       }     
-
-      // else {
-      //   console.log("No match found!")
-      // }
+      else if(el.email != enteredUserName)
+      {
+        setErrorsLogin('Please make sure that the email or password is correct..');
+        console.log("No match found!");     
+      }
     });      
 };
 
@@ -128,11 +129,7 @@ function Login()
 //         setTempCreditcard([...tempCreditcard, el]);
 //         // setCustomerCreditcardData([el]);        
 //       }
-          else
-          {
-            setErrorsLogin('Please make sure that the email or password is correct..');
-            console.log("No match found!");     
-          }
+
 //   });      
 // }
 
@@ -181,7 +178,7 @@ console.log(currentlyLoggedIn);
       </form>
       <div className="errorMessage">
         {errorsLogin && 
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
        {errorsLogin}
       </div>
       }
