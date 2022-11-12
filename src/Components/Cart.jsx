@@ -22,7 +22,10 @@ function Cart()
         setCustomerCartTotalCost(0);
         console.log(customerCart);        
         alert("Cart is cleared!");
+        console.log(customerCart.length)
     }
+
+    console.log(customerCart);
 
     if(customerCart.length == 0)
     {
@@ -97,11 +100,9 @@ function Cart()
 
                 <div className="px-1 d-flex justify-content-between">
                     <div className="d-flex flex-column mx-1">
-                        {customerCart.map((item) => 
-                        
-                        <div key={item.productId} className="p-3 mb-2 w-100 modal-body border border-dark rounded">
-                            <table>
-                        
+                        {customerCart.map((item, index) =>                         
+                        <div key={index} className="p-3 mb-2 w-100 modal-body border border-dark rounded">
+                            <table>                        
                                 <tbody>
                                     <tr> 
                                     
