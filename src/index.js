@@ -10,7 +10,9 @@ export const CustomerArray = createContext(null);
 export const CreditcardArray = createContext(null);
 export const ProductArray = createContext(null);
 export const CategoryArray = createContext(null);
+export const ReceiptArray = createContext(null);
 
+export const CustomerReceipt = createContext(null);
 export const CurrentlyLoggedin = createContext(null);
 export const CustomerData = createContext(null);
 export const CustomerCreditcardData = createContext(null);
@@ -20,7 +22,8 @@ export const CustomerCartTotalCost = createContext(null);
 export const CustomerArrayGotUpdated = createContext(null);
 export const CustomerCreditcardArrayGotUpdated = createContext(null);
 export const CategoryArraySorter = createContext(null);
-
+// add CustomerReciptData
+//
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // The StrictMode will call Axios get twice and will give us !Aloot! of data, thats why i commented it out.

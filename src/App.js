@@ -30,10 +30,28 @@ import {
   CustomerCart,
   CustomerCartTotalCost,
   CategoryArraySorter,
+  ReceiptArray,
+  CustomerReceipt,
 } from "./index";
 import { AddPaymentMethod } from "./Components/AddPaymentMethod";
 
 function App() {
+  const [customerReceipt, setCustomerReceipt] = useState([]);
+
+  const providerCustomerReceipt = useMemo(
+    () => ({ customerReceipt, setCustomerReceipt }),
+    [customerReceipt, setCustomerReceipt]
+  );
+
+  const [receiptArray, setReceiptArray] = useState([]);
+
+  const providerReceiptArray = useMemo(
+    () => ({ receiptArray, setReceiptArray }),
+    [receiptArray, setReceiptArray]
+  );
+
+  //`<------------------ code above not in use yet <------------------------
+
   const [categoryArraySorter, setCategoryArraySorter] = useState([]);
 
   const providerCategoryArraySorter = useMemo(
@@ -132,6 +150,36 @@ function App() {
     [CategoryList, setCategoryList]
   );
 
+  // add Axios get for ReciptItems
+  useEffect(() => {
+    const getUsers = async () => {
+      await Axios.get("https://localhost:7117/api/ReceiptItemAPI")
+        .then((res) => {
+          setCustomerReceipt(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getUsers();
+  }, []);
+  console.log("receiptITEMS: ", customerReceipt);
+
+  // Get for "Kvitton"
+  useEffect(() => {
+    const getUsers = async () => {
+      await Axios.get("https://localhost:7117/api/ReceiptAPI")
+        .then((res) => {
+          setReceiptArray(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getUsers();
+  }, []);
+  console.log("receipt list GET: ", receiptArray);
+
   useEffect(() => {
     const getUsers = async () => {
       await Axios.get("https://localhost:7117/api/IdentityAPI")
@@ -144,7 +192,7 @@ function App() {
     };
     getUsers();
   }, [isAuthenticated]);
-  // console.log(userList);
+  console.log(userList);
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -159,7 +207,7 @@ function App() {
     };
     getCustomers();
   }, [arrayUpdate]);
-  // console.log(customerList);
+  console.log(customerList);
 
   useEffect(() => {
     const getCreditcard = async () => {
@@ -240,23 +288,23 @@ function App() {
         <Route
           path="/Cart"
           element={
-            <CustomerCartTotalCost.Provider
-              value={providerCustomerCartTotalCost}
+            <CustomerCreditcardData.Provider
+              value={providerCustomerCreditcardData}
             >
-              <CustomerCart.Provider value={providerCustomerCart}>
-                <Cart />
-              </CustomerCart.Provider>
-            </CustomerCartTotalCost.Provider>
+              <CustomerData.Provider value={providerCustomerData}>
+                <UserAuthenticator.Provider value={providerUserAuthenticator}>
+                  <CustomerCartTotalCost.Provider
+                    value={providerCustomerCartTotalCost}
+                  >
+                    <CustomerCart.Provider value={providerCustomerCart}>
+                      <Cart />
+                    </CustomerCart.Provider>
+                  </CustomerCartTotalCost.Provider>
+                </UserAuthenticator.Provider>
+              </CustomerData.Provider>
+            </CustomerCreditcardData.Provider>
           }
         />
-        {/* <Route
-          path="/NewCart"
-          element={
-            // <CustomerCart.Provider value={providerCustomerCart}>
-            <NewCart />
-            // </CustomerCart.Provider>
-          }
-        /> */}
         <Route
           path="/Login"
           element={
@@ -286,31 +334,39 @@ function App() {
         <Route
           path="/MyAccount"
           element={
-            <CustomerCreditcardArrayGotUpdated.Provider
-              value={providerCreditcardArrayUpdate}
-            >
-              <CustomerArray.Provider value={providerCustomer}>
-                <UserAuthenticator.Provider value={providerUserAuthenticator}>
-                  <CustomerCreditcardData.Provider
-                    value={providerCustomerCreditcardData}
-                  >
-                    <CustomerData.Provider value={providerCustomerData}>
-                      <CurrentlyLoggedin.Provider
-                        value={providerCurrentlyLoggin}
+            <CustomerReceipt.Provider value={providerCustomerReceipt}>
+              <ReceiptArray.Prodiver value={providerReceiptArray}>
+                <CustomerCreditcardArrayGotUpdated.Provider
+                  value={providerCreditcardArrayUpdate}
+                >
+                  <CustomerArray.Provider value={providerCustomer}>
+                    <UserAuthenticator.Provider
+                      value={providerUserAuthenticator}
+                    >
+                      <CustomerCreditcardData.Provider
+                        value={providerCustomerCreditcardData}
                       >
-                        <CustomerArrayGotUpdated.Provider
-                          value={providerArrayUpdate}
-                        >
-                          <CreditcardArray.Provider value={providerCreditcard}>
-                            <MyAccount />
-                          </CreditcardArray.Provider>
-                        </CustomerArrayGotUpdated.Provider>
-                      </CurrentlyLoggedin.Provider>
-                    </CustomerData.Provider>
-                  </CustomerCreditcardData.Provider>
-                </UserAuthenticator.Provider>
-              </CustomerArray.Provider>
-            </CustomerCreditcardArrayGotUpdated.Provider>
+                        <CustomerData.Provider value={providerCustomerData}>
+                          <CurrentlyLoggedin.Provider
+                            value={providerCurrentlyLoggin}
+                          >
+                            <CustomerArrayGotUpdated.Provider
+                              value={providerArrayUpdate}
+                            >
+                              <CreditcardArray.Provider
+                                value={providerCreditcard}
+                              >
+                                <MyAccount />
+                              </CreditcardArray.Provider>
+                            </CustomerArrayGotUpdated.Provider>
+                          </CurrentlyLoggedin.Provider>
+                        </CustomerData.Provider>
+                      </CustomerCreditcardData.Provider>
+                    </UserAuthenticator.Provider>
+                  </CustomerArray.Provider>
+                </CustomerCreditcardArrayGotUpdated.Provider>
+              </ReceiptArray.Prodiver>
+            </CustomerReceipt.Provider>
           }
         />
         <Route

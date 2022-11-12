@@ -1,7 +1,8 @@
 import React from "react";
-import { useState, useContext } from "react";
-import { CustomerCart, CustomerCartTotalCost } from "../index";
+import { useState, useContext, useEffect } from "react";
+import { CustomerCart, CustomerCartTotalCost, CustomerData, CustomerCreditcardData, UserAuthenticator } from "../index";
 import {Card, Col, Container, Image, ListGroup, Row, Title} from "react-bootstrap"
+import Axios from "axios";
 // import imageExample from "../Image/Logo.PNG";
 // import cartItems from "./Data/ismet3.json"
 
@@ -10,10 +11,128 @@ import {Card, Col, Container, Image, ListGroup, Row, Title} from "react-bootstra
 
 function Cart()
 {        
+    const {isAuthenticated, setIsAuthenticated} = useContext(UserAuthenticator);
+    const {customerData, setCustomerData} = useContext(CustomerData);
+    const {customerCreditcardData, setCustomerCreditcardData} = useContext(CustomerCreditcardData);
+
     const {customerCart, setCustomerCart} = useContext(CustomerCart);
     const {customerCartTotalCost, setCustomerCartTotalCost} = useContext(CustomerCartTotalCost)
 
+    const [ postReciptData, setPostReciptData] = useState();    
+    const [ postReciptId, setPostReciptId] = useState(null);
+
     console.log(customerCart);
+    
+    function createReciptData()
+    {  
+        console.log("Totalcost: ",customerCartTotalCost, "CustomerId: ",customerData[0].customerId);
+
+        // function postNewRecipt (){
+            Axios.post(`https://localhost:7117/api/ReceiptAPI`, {
+              TotalCost: customerCartTotalCost,
+              CustomerId: customerData[0].customerId,
+              })
+              .then(function (response) {
+                console.log(response);
+                if(response.status == 400)
+                {
+                  console.log("Data post failed!")
+                }
+        
+                else if(response.status == 200)
+                {
+                 console.log("Data was successfully posted!")
+                 setPostReciptId(response.data)
+                 const newReciptId = response.data;
+                 createReciptItems(newReciptId);
+                }
+        
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          }
+        //   postNewRecipt();
+    // }
+
+    function createReciptItems(newReciptId){
+        customerCart.forEach(element => {
+            let name = element.name;
+            let convertPrice = element.price;
+            let price = '' + convertPrice;
+            let description = element.description;
+            let img = element.description;
+            let brand = element.brand;
+            let convertId = newReciptId;
+            let receiptId = '' + convertId;
+
+            // console.log("Name: ",name , typeof(name));
+            // console.log("Price: ",price, typeof(price));
+            // console.log("Description: ",description , typeof(description));
+            // console.log("IMG: ",img , typeof(img));
+            // console.log("Brand: ",brand , typeof(brand));
+            // console.log("ReceiptID: ",receiptId , typeof(receiptId));
+            // console.log("------------------------------")
+
+        Axios.post(`https://localhost:7117/api/ReceiptItemAPI`, {
+            Name: name, 
+            Price: price,
+            Description: description,
+            IMG: img,
+            Brand: brand,
+            ReceiptId: receiptId,
+
+            })
+            .then(function (response) {
+              console.log(response);
+              if(response.status == 400)
+              {
+                console.log("Data post failed!")
+              }
+      
+              else if(response.status == 200)
+              {
+               console.log("Data was successfully posted!")
+            //    setPostReciptId(response.data)
+              }
+      
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        });
+        // setPostReciptId(null);
+        setCustomerCart([]);
+        setCustomerCartTotalCost(0);
+        alert("Your order went through!, you will find your receipt in MyAccount")
+    }
+ 
+    function postDataForRecipte()
+    {
+        if(isAuthenticated != true)
+        {
+            alert("You are not loggedin, please loggin or register loggin")
+        }
+
+        else if(isAuthenticated == true && customerData.length == 0)
+        {
+            alert("Please add customerdata in MyAccount befor checking out!")
+        }
+
+        else if(isAuthenticated == true && customerData.length != 0 && customerCreditcardData.length == 0)
+        {
+            alert("Please add creditcarddata in MyAccount befor checking out!")
+        }
+
+        else if(isAuthenticated == true && customerData.length != 0 && customerCreditcardData.length != 0)
+        {
+            createReciptData();  
+        }
+    }
+
+    useEffect(() =>{
+        console.log('useEffect ran!')
+    });
 
     function deleteCartItems()
     {
@@ -71,7 +190,7 @@ function Cart()
                             {/* If not logged in, give error errorMessage
                             if logged in but no customer or creditcard data give error and navigate to MyAccount to add */}
                             <div className="d-grid gap-2 col-8 mx-auto py-auto">
-                                <button onClick={() => alert("Checkout!")} className="btn btn-success">
+                                <button onClick={postDataForRecipte} className="btn btn-success">
                                     Go to checkout
                                 </button>
                             </div>
@@ -173,7 +292,7 @@ function Cart()
                             </h5>
                     
                             <div className="d-grid gap-2 col-8 mx-auto py-auto">
-                                <button onClick={() => alert("Checkout!")} className="btn btn-success">
+                                <button onClick={postDataForRecipte} className="btn btn-success">
                                     Go to checkout
                                 </button>
                             </div>

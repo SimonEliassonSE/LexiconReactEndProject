@@ -2,7 +2,8 @@ import axios from "axios";
 import { Row } from "react-bootstrap";
 import { useEffect, useState, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { CustomerCreditcardData, CustomerData, UserAuthenticator, CurrentlyLoggedin, CustomerArray, CustomerArrayGotUpdated, CustomerCreditcardArrayGotUpdated, CreditcardArray } from "../index";
+import { CustomerCreditcardData, CustomerData, UserAuthenticator, CurrentlyLoggedin, CustomerArray, CustomerArrayGotUpdated, CustomerCreditcardArrayGotUpdated, CreditcardArray,  ReceiptArray,
+    CustomerReceipt, } from "../index";
 
 export const MyAccount = () => {
     
@@ -14,8 +15,11 @@ export const MyAccount = () => {
     const { customerList, setCustomerList } = useContext(CustomerArray);
     const { arrayUpdate, setArrayUpdate } = useContext(CustomerArrayGotUpdated);
     const {creditcardArrayUpdate, setCreditcardArrayUpdate} = useContext(CustomerCreditcardArrayGotUpdated);
-    const { creditcardList, setCreditcardList } = useContext(CreditcardArray)
+    const { creditcardList, setCreditcardList } = useContext(CreditcardArray);
+    const { customerReceipt, setCustomerReceipt } = useContext(CustomerReceipt);
+    const { receiptArray, setReceiptArray } = useContext(ReceiptArray);
 
+    // use regulare useState hooks to make the recipt info. Only needed here in my account 
 
 
     const [firstName, setFirstName] = useState("");
