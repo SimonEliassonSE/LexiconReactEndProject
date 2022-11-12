@@ -1,17 +1,18 @@
 import "./App.css";
 import { Homepage } from "./Components/Homepage";
-import { Products } from "./Components/Products";
+import Products from "./Components/Products";
 import { MyAccount } from "./Components/MyAccount";
 import { AddPersonalDetails } from "./Components/AddPersonalDetails";
 import { NavigationBar } from "./Components/NavigationBar";
-import { Cart } from "./Components/Cart";
+import Cart from "./Components/Cart";
+// import NewCart from "./Components/NewCart";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import { useState, useMemo, useEffect } from "react";
-import { hasAuthenticated } from "./services/AuthApi";
-import Auth from "./Context/Auth";
-import AuthenticatedRoute from "./Components/AuthenticatedRoute";
+// import { hasAuthenticated } from "./services/AuthApi";
+// import Auth from "./Context/Auth";
+// import AuthenticatedRoute from "./Components/AuthenticatedRoute";
 import Axios from "axios";
 
 import {
@@ -26,10 +27,34 @@ import {
   CustomerCreditcardData,
   CustomerArrayGotUpdated,
   CustomerCreditcardArrayGotUpdated,
+  CustomerCart,
+  CustomerCartTotalCost,
+  CategoryArraySorter,
 } from "./index";
 import { AddPaymentMethod } from "./Components/AddPaymentMethod";
 
 function App() {
+  const [categoryArraySorter, setCategoryArraySorter] = useState([]);
+
+  const providerCategoryArraySorter = useMemo(
+    () => ({ categoryArraySorter, setCategoryArraySorter }),
+    [categoryArraySorter, setCategoryArraySorter]
+  );
+
+  const [customerCartTotalCost, setCustomerCartTotalCost] = useState(0);
+
+  const providerCustomerCartTotalCost = useMemo(
+    () => ({ customerCartTotalCost, setCustomerCartTotalCost }),
+    [customerCartTotalCost, setCustomerCartTotalCost]
+  );
+
+  const [customerCart, setCustomerCart] = useState([]);
+
+  const providerCustomerCart = useMemo(
+    () => ({ customerCart, setCustomerCart }),
+    [customerCart, setCustomerCart]
+  );
+
   const [creditcardArrayUpdate, setCreditcardArrayUpdate] = useState(false);
 
   const providerCreditcardArrayUpdate = useMemo(
@@ -177,7 +202,7 @@ function App() {
     };
     getCategorys();
   }, []);
-  // console.log(CategoryList);
+  console.log(CategoryList);
 
   return (
     <div className="App">
@@ -192,8 +217,46 @@ function App() {
       </CustomerCreditcardData.Provider>
       <Routes>
         <Route index path="/" element={<Homepage />} />
-        <Route path="/Products" element={<Products />} />
-        <Route path="/Cart" element={<Cart />} />
+        <Route
+          path="/Products"
+          element={
+            <CustomerCartTotalCost.Provider
+              value={providerCustomerCartTotalCost}
+            >
+              <CustomerCart.Provider value={providerCustomerCart}>
+                <CategoryArray.Provider value={providerCategory}>
+                  <ProductArray.Provider value={providerProduct}>
+                    <CategoryArraySorter.Provider
+                      value={providerCategoryArraySorter}
+                    >
+                      <Products />
+                    </CategoryArraySorter.Provider>
+                  </ProductArray.Provider>
+                </CategoryArray.Provider>
+              </CustomerCart.Provider>
+            </CustomerCartTotalCost.Provider>
+          }
+        />
+        <Route
+          path="/Cart"
+          element={
+            <CustomerCartTotalCost.Provider
+              value={providerCustomerCartTotalCost}
+            >
+              <CustomerCart.Provider value={providerCustomerCart}>
+                <Cart />
+              </CustomerCart.Provider>
+            </CustomerCartTotalCost.Provider>
+          }
+        />
+        {/* <Route
+          path="/NewCart"
+          element={
+            // <CustomerCart.Provider value={providerCustomerCart}>
+            <NewCart />
+            // </CustomerCart.Provider>
+          }
+        /> */}
         <Route
           path="/Login"
           element={
