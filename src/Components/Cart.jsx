@@ -104,7 +104,7 @@ function Cart()
         // setPostReciptId(null);
         setCustomerCart([]);
         setCustomerCartTotalCost(0);
-        alert("Your order went through!, you will find your receipt in MyAccount")
+        alert("Order passed! You will find your receipt in MyAccount.")
     }
  
     function postDataForRecipte()
@@ -150,61 +150,12 @@ function Cart()
     {
         return (
             <div className="container container-sm">
-                <div className="p-3">
-                    <h2 className="d-flex justify-content-start">Shopping cart</h2>
-                </div>
+                    <h2 className="d-flex justify-content-start p-3">Shopping cart</h2>
 
-                <div className="px-1 d-flex justify-content-between">
-                    <div className="d-flex flex-column mx-1">
-                        <h5>Your cart is currently empty</h5>
-                        <h5>Try adding something</h5>
-                    </div>
+                
+                        <h5 className="d-flex justify-content-start px-3">Your cart is currently empty.</h5>
             
-                <div className="mx-auto my-auto">
-                    
-                    {/*<div className="d-flex flex-column my-auto mx-auto py-2">*/}
-
-                    <div style={{width: "350px", padding: "15px", backgroundColor: "black"}} className="rounded">
-                        <div className="p-1 rounded" style={{backgroundColor: "white"}}>
-
-                            <h4 className="p-3 text-left">
-                                Varukorg
-                            </h4>
-                        
-                            <h5 className="d-flex justify-content-between px-3">
-                                <span className="justify-content-start">Cost</span>
-                                <span className="justify-content-end">{customerCartTotalCost}:- </span>
-                            </h5>
-                        
-                            {/* <h5 className="d-flex justify-content-between px-3 pb-1">
-                                <span className="justify-content-start">Delivery</span>
-                                <span className="justify-content-end">35:- </span>
-                            </h5> */}
-
-                            <h5 className="d-flex justify-content-between border-top px-3 pb-4 pt-2">
-                                <span className="justify-content-start">Total</span>
-                                <span className="justify-content-end">{customerCartTotalCost}:- </span>
-                            </h5>
-                    
-
-                            {/* If not logged in, give error errorMessage
-                            if logged in but no customer or creditcard data give error and navigate to MyAccount to add */}
-                            <div className="d-grid gap-2 col-8 mx-auto py-auto">
-                                <button onClick={postDataForRecipte} className="btn btn-success">
-                                    Go to checkout
-                                </button>
-                            </div>
-                        
-                            <div className="d-grid gap-2 col-8 mx-auto px-auto py-2">
-                                <button onClick={deleteCartItems}  className="btn btn-danger">
-                                    Clear cart
-                                </button>
-                                {/* deleteCartItems */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                
         </div>
     );                
     }
@@ -273,7 +224,7 @@ function Cart()
                         <div className="p-1 rounded" style={{backgroundColor: "white"}}>
 
                             <h4 className="p-3 text-left">
-                                Varukorg
+                                Shopping cart
                             </h4>
                         
                             <h5 className="d-flex justify-content-between px-3">

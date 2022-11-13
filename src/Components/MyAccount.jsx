@@ -398,40 +398,52 @@ if(isAuthenticated == true)
         {
             return(
                 <div className="container container-sm">
-                <div className="p-3">
-                    <h2 className="d-flex justify-content-start">My account</h2>
-                </div>
-                <div className="d-flex justify-content-start px-3 py-1">  
-
-                       {customerData.map((customer) => (
-                        <div className="card" key={customer.customerId}>
-                                                    <h5 className="d-flex justify-content-start">My customer details</h5>
-                            <div className="card-body form-group">
-                                <label >First name</label>
-                                <input className="form-control" value={customer.firstName} readOnly/>
-                                <label className="form-label">Last name</label>
-                                <input className="form-control" value={customer.lastName} readOnly/>
-                                <label className="form-label">Email</label>
-                                <input className="form-control" value={customer.email} readOnly/>
-                                <label className="form-label">Phonenumber</label>
-                                <input className="form-control" value={customer.phoneNumber} readOnly/>
-                                <label className="form-label">City</label>
-                                <input className="form-control" value={customer.city} readOnly/>
-                                <label className="form-label">Country</label>
-                                <input className="form-control" value={customer.country} readOnly/>
-                                <label className="form-label">Zipcode</label>
-                                <input className="form-control" value={customer.zipCode} readOnly/>
-                                <label className="form-label">Adress</label>
-                                <input className="form-control" value={customer.address} readOnly/>
-                            </div>                            
+             
+                <div className="d-flex justify-content-start p-3">
+                            <p className="display-6">My account</p>
                         </div>
-                       ))}
+                
 
+                
+
+                
+                {customerData.map((customer) => (
+                    <div key={customer.customerId} className="border border-dark rounded w-50 p-4">
+
+                    <div className="px-3">
+                        <h4 className="d-flex justify-content-start">Personal details</h4>
                     </div>
-                    <div className="px-1 mx-3 rounded" style={{backgroundColor: "gray", width: "20%"}}>
+
+                    <div align="left">
+
+                        <p className="px-4 lead"><i className="bi bi-person-circle"></i>
+                            <b> {customer.firstName} {customer.lastName}</b>
+                            </p>
+                    </div>
+
+                        <div className="d-flex justify-content-start">
+                        <p className="px-4 lead"><i className="bi bi-envelope-fill"></i><b> {customer.email}</b></p>
+                        </div>
+
+                        <div className="d-flex justify-content-start">
+                        <p align="center" className="px-4 lead"><i className="bi bi-telephone-fill"></i><b> {customer.phoneNumber}</b></p>
+                        </div>
+
+                        <div className="d-flex justify-content-start mx-4">
+                        <p className="lead"><i className="bi bi-pin-map-fill"> </i></p>
+                        <div className="d-flex flex-column" style={{paddingLeft: "6px"}} align="left">
+                            <p className="lead"><b> {customer.address}</b></p>
+                            <p className="lead"><b> {customer.zipCode} {customer.city}</b></p>
+                            <p className="lead"><b> {customer.country}</b></p>
+                            </div>
+                        </div>
+                    </div>
+
+                ))}
+                    <div className="p-3 my-3 rounded" style={{backgroundColor: "gray", width: "25%"}}>
                             <div className="d-flex mx-1 py-2">
                                 <form className="px-3 py-2" onSubmit={submitCreditcardHandler}>                             
-                                    <p className="display-6">FORM</p>
+                                    <p className="display-6">PAYMENT FORM</p>
                                     <div className="form-group">
                                             <label style={{float: "left", paddingLeft: "5px"}}>Credit card number</label>
                                             <input 
@@ -479,58 +491,102 @@ if(isAuthenticated == true)
         {
             return(
                 <div className="container container-sm">
-                <div className="p-3">
-                    <h2 className="d-flex justify-content-start">My account</h2>
+                <div className="d-flex justify-content-start p-3">
+                            <p className="display-6">My account</p>
+                        </div>
+                
+
+                
+
+                
+                {customerData.map((customer) => (
+                    <div key={customer.customerId} className="border border-dark rounded w-50 p-4">
+
+                    <div className="px-3">
+                        <h4 className="d-flex justify-content-start">Personal details</h4>
+                    </div>
+
+                    <div align="left">
+
+                        <p className="px-4 lead"><i className="bi bi-person-circle"></i>
+                            <b> {customer.firstName} {customer.lastName}</b>
+                            </p>
+                    </div>
+
+                        <div className="d-flex justify-content-start">
+                        <p className="px-4 lead"><i className="bi bi-envelope-fill"></i><b> {customer.email}</b></p>
+                        </div>
+
+                        <div className="d-flex justify-content-start">
+                        <p align="center" className="px-4 lead"><i className="bi bi-telephone-fill"></i><b> {customer.phoneNumber}</b></p>
+                        </div>
+
+                        <div className="d-flex justify-content-start mx-4">
+                        <p className="lead"><i className="bi bi-pin-map-fill"> </i></p>
+                        <div className="d-flex flex-column" style={{paddingLeft: "6px"}} align="left">
+                            <p className="lead"><b> {customer.address}</b></p>
+                            <p className="lead"><b> {customer.zipCode} {customer.city}</b></p>
+                            <p className="lead"><b> {customer.country}</b></p>
+                            </div>
+                        </div>
+                    </div>
+
+                ))}
+
+           
+
+                {customerCreditcardData.map((creditCard) => (
+                    <div key={creditCard.ccId} className="border border-dark rounded w-50 p-4 mb-5 mt-2">
+
+
+                <div className="px-3 pt-3">
+                    <h4 className="d-flex justify-content-start">Payment details</h4>
                 </div>
-                             
-                <h5 className="d-flex justify-content-start">My customer details</h5>
-                <div className="d-flex justify-content-start px-3 py-1">                    
+                    <div align="left">
 
-                    {customerData.map((customer) => (
-                        <div className="card" key={customer.customerId}>
-                            <div className="card-body form-group">
-                                <label className="form-label">First name</label>
-                                <input className="form-control" value={customer.firstName} readOnly/>
-                                <label className="form-label">Last name</label>
-                                <input className="form-control" value={customer.lastName} readOnly/>
-                                <label className="form-label">Email</label>
-                                <input className="form-control" value={customer.email} readOnly/>
-                                <label className="form-label">Phonenumber</label>
-                                <input className="form-control" value={customer.phoneNumber} readOnly/>
-                                <label className="form-label">City</label>
-                                <input className="form-control" value={customer.city} readOnly/>
-                                <label className="form-label">Country</label>
-                                <input className="form-control" value={customer.country} readOnly/>
-                                <label className="form-label">Zipcode</label>
-                                <input className="form-control" value={customer.zipCode} readOnly/>
-                                <label className="form-label">Adress</label>
-                                <input className="form-control" value={customer.address} readOnly/>
-                            </div>                            
-                        </div>                           
-                       ))}
+                        <div className="row">
+                            <div className="col">
+                            <p className="px-4 lead"><i className="bi bi-credit-card-2-front"></i>
+                                <b> {creditCard.creditNumber}</b>
+                                </p>
+                            </div>
+                            <div className="col">
+                                <p className="px-4 lead"><i className="bi bi-credit-card-2-back"></i>
+                                <b> {creditCard.ccv}</b>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col">
+                            <p className="px-4 lead"><i className="bi bi-bank2"></i><b> {creditCard.bank} </b></p>
+                            </div>
+                            <div className="col">
+                                <p className="lead" style={{paddingLeft: "15px"}}>
+                                    SEK<b> {creditCard.value}</b>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        
+                        
+                    </div>
+
+                      
 
                     </div>
-                    <div className="d-flex justify-content-start px-3 py-1">
 
-                    {customerCreditcardData.map((creditcard) => (
-                        <div className="card" key={creditcard.ccId}>
-                            <div className="card-body form-group">
-                                <label className="form-label">Creditcard numbers</label>                            
-                                <input className="form-control" value={creditcard.creditNumber} readOnly/>                          
-                                <label className="form-label">ccv</label>                              
-                                <input className="form-control" value={creditcard.ccv} readOnly/>
-                                <label className="form-label">Saldo</label>                             
-                                <input className="form-control" value={creditcard.value} readOnly/>
-                                <label className="form-label">Bank</label>                            
-                                <input className="form-control" value={creditcard.bank} readOnly/>
-                            </div>                            
-                        </div>                           
-                       ))}               
+                ))}
 
-                    </div>
+                
                     {/* d-flex justify-content-start px-3 py-1 */}
                     {/* <div className="card"> */}
-                        <div className="card-body">
+
+                    <div className="px-3">
+                        <h4 className="d-flex justify-content-start">Orders</h4>
+                    </div>
+                        <div className="card-body mb-5">
                             {receiptArray.map((receipt) => {
                                 // We need to get al the receiptItems that hase receiptId == receipt sent in through map        
                                 // let movingBin;                    
@@ -542,34 +598,68 @@ if(isAuthenticated == true)
                                 {              
                                     return (
                                     <div className="card" key={receipt.receiptId}>
-                                    <div className="card-body">
-                                    <label className="form-label d-flex justify-content-start">ReceiptId: {receipt.receiptId}<p> </p></label>
-                                    <label className="form-label d-flex justify-content-start">Receipt Cost: {receipt.totalCost} <p> </p></label>
-                                    <label className="form-label d-flex justify-content-start">Receipt Orderdate: {receipt.orderDate} <p> </p></label>    
+                                    <div className="card-body mx-2 my-2 py-3" align="left">
+                                            <div className="row mx-1">
+                                                <div className="col">
+                                                    <label className="form-label">Order number</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">Total cost (SEK)</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">Date</label>
+                                                </div>
+                                            </div>
+                                            <div className="row mx-1">
+                                                <div className="col">
+                                                    <label className="form-label">{receipt.receiptId}</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">{receipt.totalCost}</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">{receipt.orderDate}</label>
+                                                </div>
+                                            </div>
+                   
                                     {receiptItemsArray.map((element) => {
                                         if(element.receiptId == receipt.receiptId)
                                         {
                                             return (
-                                            <div className="card">
-                                            <div className="card-body">
-                                            <table className="mb-2 mt-2">
-                                                <thead>
-                                                    <tr className="mb-2">
-                                                        <th>Product name</th>
-                                                        <th>Product brand</th>
-                                                        <th>Product description</th>
-                                                        <th>Product price</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr key={element.receiptItemId}>
-                                                        <td>{element.name}</td>
-                                                        <td>{element.brand}</td>
-                                                        <td>{element.description}</td>
-                                                        <td>{element.price}</td>                                                        
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            <div className="card bg-light">
+                                            <div className="card-body my-2">
+
+
+                                            <div className="row mx-1">
+                                                <div className="col">
+                                                    <label className="form-label">Name</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">Brand</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">Description</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">Price in SEK</label>
+                                                </div>
+                                            </div>
+                                            <div className="row mx-1" key={element.receiptItemId}>
+                                                <div className="col">
+                                                    <label className="form-label">{element.name}</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">{element.brand}</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">{element.description}</label>
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">{element.price}</label>
+                                                </div>
+                                            </div>
+
+                                            
                                             </div>
                                             </div>
                                             );          
