@@ -3,7 +3,7 @@ import { Row } from "react-bootstrap";
 import { useEffect, useState, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { CustomerCreditcardData, CustomerData, UserAuthenticator, CurrentlyLoggedin, CustomerArray, CustomerArrayGotUpdated, CustomerCreditcardArrayGotUpdated, CreditcardArray,  ReceiptArray,
-    CustomerReceipt, } from "../index";
+    ReceiptItemsArray, TempReceiptList } from "../index";
 
 export const MyAccount = () => {
     
@@ -16,12 +16,18 @@ export const MyAccount = () => {
     const { arrayUpdate, setArrayUpdate } = useContext(CustomerArrayGotUpdated);
     const {creditcardArrayUpdate, setCreditcardArrayUpdate} = useContext(CustomerCreditcardArrayGotUpdated);
     const { creditcardList, setCreditcardList } = useContext(CreditcardArray);
-    const { customerReceipt, setCustomerReceipt } = useContext(CustomerReceipt);
+    const { receiptItemsArray, setReceiptItemsArray } = useContext(ReceiptItemsArray);
     const { receiptArray, setReceiptArray } = useContext(ReceiptArray);
+    const { tempReceiptList, setTempReceiptList } = useContext(TempReceiptList)
 
     // use regulare useState hooks to make the recipt info. Only needed here in my account 
+    // Only need 2 display receiptItemsArray & receiptArray where customerId customerData.customerId
 
-
+    // Contains Receipts that are connected to customerData.customerId
+    const [userReceipt, setUserReceipt] = useState("");
+    // Contains ReceiptItems that are connected to userReceipt
+    const [userReceiptItems, setUserReceiptItems] = useState("");
+    
     const [firstName, setFirstName] = useState("");
 
     const [lastName, setLastName] = useState("");
@@ -239,8 +245,42 @@ if(customerData != 0 && customerCreditcardData == 0)
         })       
     }
 
+    function getReceipt()
+    {
+        if(receiptArray.length != 0 && customerData.length != 0)
+        {
+            receiptArray.forEach((r) => {
+                if(r.customerId == customerData[0].customerId)
+                {
+                    console.log("getReceipt: ",r);
+                    // setTempReceiptList([...tempReceiptList, r])
+                    // setUserReceipt([...userReceipt, r])
+                    // receiptItemsArray.forEach((rI) => {
+                    //     if(rI.receiptId == r.receiptId)
+                    //     {
+                    //         console.log("getReceiptitem: ",rI);
+                    //     }
 
+                    // })
+                }
+                    // console.log("getReceipt: ",element);
+            })
+            // const tempCID = '' + customerData.customerId;
+            // console.log(customerData.customerId);
+            // console.log(customerData[0].customerId);           
+            // console.log(tempCID);
+        }
+    }
+    getReceipt();
+// console.log(tempReceiptList);
+    
+
+
+
+    // console.log(userReceipt);
 console.log("cD" ,customerData, "cCD" , customerCreditcardData,"currentlyLoggedIn" , currentlyLoggedIn, creditcardList)
+console.log("receiptArray: ", receiptArray)
+console.log("receiptItemsArray: ", receiptItemsArray);
 
 if(isAuthenticated == true)
 {
@@ -488,11 +528,140 @@ if(isAuthenticated == true)
                        ))}               
 
                     </div>
-                    {/* <a href="#"> Change password</a> */}
-                    <p> Display reciptes "get the data from backend"</p>    
-                </div>     
+                    {/* d-flex justify-content-start px-3 py-1 */}
+                    {/* <div className="card"> */}
+                        <div className="card-body">
+                            {receiptArray.map((receipt) => {
+                                // We need to get al the receiptItems that hase receiptId == receipt sent in through map        
+                                // let movingBin;                    
+                                // receiptItemsArray.forEach((element) => {          
+                                //         movingBin = element;
+                                // })
+
+                                if(receipt.customerId == customerData[0].customerId)
+                                {              
+                                    return (
+                                    <div className="card" key={receipt.receiptId}>
+                                    <div className="card-body">
+                                    <label className="form-label d-flex justify-content-start">ReceiptId: {receipt.receiptId}<p> </p></label>
+                                    <label className="form-label d-flex justify-content-start">Receipt Cost: {receipt.totalCost} <p> </p></label>
+                                    <label className="form-label d-flex justify-content-start">Receipt Orderdate: {receipt.orderDate} <p> </p></label>    
+                                    {receiptItemsArray.map((element) => {
+                                        if(element.receiptId == receipt.receiptId)
+                                        {
+                                            return (
+                                            <div className="card">
+                                            <div className="card-body">
+                                            <table className="mb-2 mt-2">
+                                                <thead>
+                                                    <tr className="mb-2">
+                                                        <th>Product name</th>
+                                                        <th>Product brand</th>
+                                                        <th>Product description</th>
+                                                        <th>Product price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr key={element.receiptItemId}>
+                                                        <td>{element.name}</td>
+                                                        <td>{element.brand}</td>
+                                                        <td>{element.description}</td>
+                                                        <td>{element.price}</td>                                                        
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                            </div>
+                                            );          
+                                        }
+                                    })}         
+                                   </div>       
+                                   </div>                            
+                                );                                    
+                                }                 
+                            })}  
+                        </div>
+                    </div> 
             )
         }
+
+        // else if(customerData.length != 0 && customerCreditcardData.length != 0 && receiptArray.length != 0)
+        // {
+        //     return(
+        //         <div className="container container-sm">
+        //         <div className="p-3">
+        //             <h2 className="d-flex justify-content-start">My account</h2>
+        //         </div>
+                             
+        //         <h5 className="d-flex justify-content-start">My customer details</h5>
+        //         <div className="d-flex justify-content-start px-3 py-1">                    
+
+        //             {customerData.map((customer) => (
+        //                 <div className="card" key={customer.customerId}>
+        //                     <div className="card-body form-group">
+        //                         <label className="form-label">First name</label>
+        //                         <input className="form-control" value={customer.firstName} readOnly/>
+        //                         <label className="form-label">Last name</label>
+        //                         <input className="form-control" value={customer.lastName} readOnly/>
+        //                         <label className="form-label">Email</label>
+        //                         <input className="form-control" value={customer.email} readOnly/>
+        //                         <label className="form-label">Phonenumber</label>
+        //                         <input className="form-control" value={customer.phoneNumber} readOnly/>
+        //                         <label className="form-label">City</label>
+        //                         <input className="form-control" value={customer.city} readOnly/>
+        //                         <label className="form-label">Country</label>
+        //                         <input className="form-control" value={customer.country} readOnly/>
+        //                         <label className="form-label">Zipcode</label>
+        //                         <input className="form-control" value={customer.zipCode} readOnly/>
+        //                         <label className="form-label">Adress</label>
+        //                         <input className="form-control" value={customer.address} readOnly/>
+        //                     </div>                            
+        //                 </div>                           
+        //                ))}
+
+        //             </div>
+        //             <div className="d-flex justify-content-start px-3 py-1">
+
+        //             {customerCreditcardData.map((creditcard) => (
+        //                 <div className="card" key={creditcard.ccId}>
+        //                     <div className="card-body form-group">
+        //                         <label className="form-label">Creditcard numbers</label>                            
+        //                         <input className="form-control" value={creditcard.creditNumber} readOnly/>                          
+        //                         <label className="form-label">ccv</label>                              
+        //                         <input className="form-control" value={creditcard.ccv} readOnly/>
+        //                         <label className="form-label">Saldo</label>                             
+        //                         <input className="form-control" value={creditcard.value} readOnly/>
+        //                         <label className="form-label">Bank</label>                            
+        //                         <input className="form-control" value={creditcard.bank} readOnly/>
+        //                     </div>                            
+        //                 </div>                           
+        //                ))}               
+
+        //             </div>
+        //             {/* <a href="#"> Change password</a> */}
+        //             <p> Display reciptes "get the data from backend"</p>   
+        //             <div className="d-flex justify-content-start px-3 py-1">
+
+        //             {/* Add receipt and receiptItems bellow here */}
+        //             {/* {customerCreditcardData.map((creditcard) => (
+        //                 <div className="card" key={creditcard.ccId}>
+        //                     <div className="card-body form-group">
+        //                         <label className="form-label">Creditcard numbers</label>                            
+        //                         <input className="form-control" value={creditcard.creditNumber} readOnly/>                          
+        //                         <label className="form-label">ccv</label>                              
+        //                         <input className="form-control" value={creditcard.ccv} readOnly/>
+        //                         <label className="form-label">Saldo</label>                             
+        //                         <input className="form-control" value={creditcard.value} readOnly/>
+        //                         <label className="form-label">Bank</label>                            
+        //                         <input className="form-control" value={creditcard.bank} readOnly/>
+        //                     </div>                            
+        //                 </div>                           
+        //                ))}                */}
+
+        //             </div> 
+        //         </div>     
+        //     )
+        // }
 }
         else if (isAuthenticated != true)
         {

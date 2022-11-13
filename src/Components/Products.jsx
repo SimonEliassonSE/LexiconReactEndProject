@@ -117,21 +117,21 @@ function sortArray(category)
 // console.log(ProductList);
     
     return (
-        <div>
-          <div className="input-group  align-items-center justify-content-center  m-5">
+        <div className="mt-4">
+          {/* <div className="input-group  align-items-center justify-content-center  m-5">
             <div id="search-autocomplete" className="form-outline">
               <input type="search" id="form1" className="form-control" placeholder="Search" />            
             </div>
           <button type="button" className="btn btn-primary">
             <i className="fa fa-search"></i>
           </button>          
-        </div>
-            <h1>Product</h1>
+        </div> */}
+            {/* <h1>Product</h1> */}
       
             <div className="container container-md">
-            <div className="p-4">
+            {/* <div className="p-4">
                 <h1 className="display-6">Web Shop</h1>
-            </div>
+            </div> */}
 
             
 
@@ -215,27 +215,6 @@ function sortArray(category)
                   <tr>
                     
                   </tr>
-
-                    {/* {displaySingelProduct.map((product) => {
-                    <tr key={product.productId}>
-                      <td>{product.productId}</td>
-                      <td>{product.name}</td>
-                      <td>{product.price}</td>
-                      <td>{product.description}</td>
-                      <td>{product.productSaldo}</td>
-                      <td><img src={product.img} style={{ width:50, height: 50 }}/></td>
-                      <td>{product.brand}</td>
-                    </tr>
-                    })
-                    } */}
-                    {/* <td>{displaySingelProduct.productId}</td>
-                    <td>{displaySingelProduct.name}</td>
-                    <td>{displaySingelProduct.price}</td>
-                    <td>{displaySingelProduct.description}</td>
-                    <td>{displaySingelProduct.productSaldo}</td>
-                    <td><img src={displaySingelProduct.img} style={{ width:50, height: 50 }}/></td>
-                    <td>{displaySingelProduct.brand}</td> */}
-
                 </tbody>
               </table>
             </div>

@@ -31,16 +31,24 @@ import {
   CustomerCartTotalCost,
   CategoryArraySorter,
   ReceiptArray,
-  CustomerReceipt,
+  ReceiptItemsArray,
+  TempReceiptList,
 } from "./index";
 import { AddPaymentMethod } from "./Components/AddPaymentMethod";
 
 function App() {
-  const [customerReceipt, setCustomerReceipt] = useState([]);
+  const [tempReceiptList, setTempReceiptList] = useState([]);
 
-  const providerCustomerReceipt = useMemo(
-    () => ({ customerReceipt, setCustomerReceipt }),
-    [customerReceipt, setCustomerReceipt]
+  const providerTempReceiptList = useMemo(
+    () => ({ tempReceiptList, setTempReceiptList }),
+    [tempReceiptList, setTempReceiptList]
+  );
+
+  const [receiptItemsArray, setReceiptItemsArray] = useState([]);
+
+  const providerReceiptItemsArray = useMemo(
+    () => ({ receiptItemsArray, setReceiptItemsArray }),
+    [receiptItemsArray, setReceiptItemsArray]
   );
 
   const [receiptArray, setReceiptArray] = useState([]);
@@ -49,8 +57,6 @@ function App() {
     () => ({ receiptArray, setReceiptArray }),
     [receiptArray, setReceiptArray]
   );
-
-  //`<------------------ code above not in use yet <------------------------
 
   const [categoryArraySorter, setCategoryArraySorter] = useState([]);
 
@@ -152,22 +158,22 @@ function App() {
 
   // add Axios get for ReciptItems
   useEffect(() => {
-    const getUsers = async () => {
+    const getReceiptItems = async () => {
       await Axios.get("https://localhost:7117/api/ReceiptItemAPI")
         .then((res) => {
-          setCustomerReceipt(res.data);
+          setReceiptItemsArray(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
     };
-    getUsers();
-  }, []);
-  console.log("receiptITEMS: ", customerReceipt);
+    getReceiptItems();
+  }, [customerCart]);
+  console.log("receiptITEMS: ", receiptItemsArray);
 
   // Get for "Kvitton"
   useEffect(() => {
-    const getUsers = async () => {
+    const getReceipts = async () => {
       await Axios.get("https://localhost:7117/api/ReceiptAPI")
         .then((res) => {
           setReceiptArray(res.data);
@@ -176,8 +182,8 @@ function App() {
           console.log(err);
         });
     };
-    getUsers();
-  }, []);
+    getReceipts();
+  }, [customerCart]);
   console.log("receipt list GET: ", receiptArray);
 
   useEffect(() => {
@@ -192,7 +198,7 @@ function App() {
     };
     getUsers();
   }, [isAuthenticated]);
-  console.log(userList);
+  // console.log(userList);
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -207,7 +213,7 @@ function App() {
     };
     getCustomers();
   }, [arrayUpdate]);
-  console.log(customerList);
+  // console.log(customerList);
 
   useEffect(() => {
     const getCreditcard = async () => {
@@ -236,7 +242,7 @@ function App() {
     };
     getProducts();
   }, []);
-  console.log(ProductList);
+  // console.log(ProductList);
 
   useEffect(() => {
     const getCategorys = async () => {
@@ -250,7 +256,7 @@ function App() {
     };
     getCategorys();
   }, []);
-  console.log(CategoryList);
+  // console.log(CategoryList);
 
   return (
     <div className="App">
@@ -334,39 +340,43 @@ function App() {
         <Route
           path="/MyAccount"
           element={
-            <CustomerReceipt.Provider value={providerCustomerReceipt}>
-              <ReceiptArray.Prodiver value={providerReceiptArray}>
-                <CustomerCreditcardArrayGotUpdated.Provider
-                  value={providerCreditcardArrayUpdate}
-                >
-                  <CustomerArray.Provider value={providerCustomer}>
-                    <UserAuthenticator.Provider
-                      value={providerUserAuthenticator}
-                    >
-                      <CustomerCreditcardData.Provider
-                        value={providerCustomerCreditcardData}
+            <TempReceiptList.Provider value={providerTempReceiptList}>
+              <ReceiptArray.Provider value={providerReceiptArray}>
+                <ReceiptItemsArray.Provider value={providerReceiptItemsArray}>
+                  {/* <ReceiptArray.Prodiver value={providerReceiptArray}> */}
+                  <CustomerCreditcardArrayGotUpdated.Provider
+                    value={providerCreditcardArrayUpdate}
+                  >
+                    <CustomerArray.Provider value={providerCustomer}>
+                      <UserAuthenticator.Provider
+                        value={providerUserAuthenticator}
                       >
-                        <CustomerData.Provider value={providerCustomerData}>
-                          <CurrentlyLoggedin.Provider
-                            value={providerCurrentlyLoggin}
-                          >
-                            <CustomerArrayGotUpdated.Provider
-                              value={providerArrayUpdate}
+                        <CustomerCreditcardData.Provider
+                          value={providerCustomerCreditcardData}
+                        >
+                          <CustomerData.Provider value={providerCustomerData}>
+                            <CurrentlyLoggedin.Provider
+                              value={providerCurrentlyLoggin}
                             >
-                              <CreditcardArray.Provider
-                                value={providerCreditcard}
+                              <CustomerArrayGotUpdated.Provider
+                                value={providerArrayUpdate}
                               >
-                                <MyAccount />
-                              </CreditcardArray.Provider>
-                            </CustomerArrayGotUpdated.Provider>
-                          </CurrentlyLoggedin.Provider>
-                        </CustomerData.Provider>
-                      </CustomerCreditcardData.Provider>
-                    </UserAuthenticator.Provider>
-                  </CustomerArray.Provider>
-                </CustomerCreditcardArrayGotUpdated.Provider>
-              </ReceiptArray.Prodiver>
-            </CustomerReceipt.Provider>
+                                <CreditcardArray.Provider
+                                  value={providerCreditcard}
+                                >
+                                  <MyAccount />
+                                </CreditcardArray.Provider>
+                              </CustomerArrayGotUpdated.Provider>
+                            </CurrentlyLoggedin.Provider>
+                          </CustomerData.Provider>
+                        </CustomerCreditcardData.Provider>
+                      </UserAuthenticator.Provider>
+                    </CustomerArray.Provider>
+                  </CustomerCreditcardArrayGotUpdated.Provider>
+                  {/* </ReceiptArray.Prodiver> */}
+                </ReceiptItemsArray.Provider>
+              </ReceiptArray.Provider>
+            </TempReceiptList.Provider>
           }
         />
         <Route
